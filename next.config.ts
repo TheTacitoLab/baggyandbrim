@@ -9,18 +9,19 @@ const nextConfig: NextConfig = {
     // (78 photography, 90 macro detail, 100 illustration) or they get coerced.
     qualities: [75, 78, 90, 100],
   },
-  // All 301. Predictable mistyped and legacy paths, per build spec Section 18.3.
+  // Predictable mistyped and legacy paths, per build spec Section 18.3. Explicit
+  // 301 (statusCode) rather than Next's default 308 from `permanent: true`.
   async redirects() {
     return [
-      { source: '/cricket-caps', destination: '/custom-cricket-caps', permanent: true },
-      { source: '/caps', destination: '/custom-cricket-caps', permanent: true },
-      { source: '/sun-hats', destination: '/cricket-sun-hats', permanent: true },
-      { source: '/baggy-caps', destination: '/baggy-cricket-caps', permanent: true },
-      { source: '/performance-caps', destination: '/performance-cricket-caps', permanent: true },
-      { source: '/presentation-caps', destination: '/cricket-presentation-caps', permanent: true },
-      { source: '/blog', destination: '/journal', permanent: true },
-      { source: '/blog/:slug', destination: '/journal/:slug', permanent: true },
-      { source: '/contact', destination: '/enquire', permanent: true },
+      { source: '/cricket-caps', destination: '/custom-cricket-caps', statusCode: 301 },
+      { source: '/caps', destination: '/custom-cricket-caps', statusCode: 301 },
+      { source: '/sun-hats', destination: '/cricket-sun-hats', statusCode: 301 },
+      { source: '/baggy-caps', destination: '/baggy-cricket-caps', statusCode: 301 },
+      { source: '/performance-caps', destination: '/performance-cricket-caps', statusCode: 301 },
+      { source: '/presentation-caps', destination: '/cricket-presentation-caps', statusCode: 301 },
+      { source: '/blog', destination: '/journal', statusCode: 301 },
+      { source: '/blog/:slug', destination: '/journal/:slug', statusCode: 301 },
+      { source: '/contact', destination: '/enquire', statusCode: 301 },
     ];
   },
 };

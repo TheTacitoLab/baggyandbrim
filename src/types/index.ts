@@ -130,6 +130,7 @@ export interface JournalArticle {
   secondaryKeywords?: string[];
   featuredImage: string;
   featuredImageAlt: string;
+  featuredImageExists: boolean; // resolved at load; false renders the placeholder
   readingTime: number;
   metaTitle?: string;
   metaDescription?: string;

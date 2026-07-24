@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { HAT_TYPES, SITE } from '@/content/site';
 import { ENQUIRY_FORM } from '@/content/enquiry';
 import {
@@ -70,6 +70,15 @@ function focusField(name: string) {
   el?.focus();
 }
 
+const noopSubscribe = () => () => {};
+
+function todayIso(): string {
+  const now = new Date();
+  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
+    now.getDate(),
+  ).padStart(2, '0')}`;
+}
+
 export function EnquiryForm({ source }: EnquiryFormProps) {
   const [values, setValues] = useState<Values>(EMPTY);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
@@ -78,17 +87,12 @@ export function EnquiryForm({ source }: EnquiryFormProps) {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
   const [banner, setBanner] = useState<string | null>(null);
   const [submittedUrgent, setSubmittedUrgent] = useState(false);
-  const [dateMin, setDateMin] = useState('');
   const started = useRef(false);
 
-  // min = today, computed on the client to respect the user's timezone.
-  useEffect(() => {
-    const now = new Date();
-    const iso = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(
-      now.getDate(),
-    ).padStart(2, '0')}`;
-    setDateMin(iso);
-  }, []);
+  // min = today, computed on the client to respect the user's timezone. Read via
+  // an external store so it stays '' on the server (no hydration mismatch) and
+  // needs no setState-in-effect.
+  const dateMin = useSyncExternalStore(noopSubscribe, todayIso, () => '');
 
   useEffect(() => {
     if (status === 'success') {

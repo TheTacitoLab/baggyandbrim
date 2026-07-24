@@ -34,8 +34,8 @@ yarn-error.log*
 .env*
 !.env.example
 
-# local dev-only screenshot helper
-_shot.mjs
+# local dev-only screenshot helpers
+_*.mjs
 
 # vercel
 .vercel

@@ -20,8 +20,9 @@ const RATIO: Record<NonNullable<JournalCardProps['variant']>, string> = {
 };
 
 function CardImage({ article, ratio }: { article: JournalArticle; ratio: string }) {
-  // featuredImage falls back to the journal-default placeholder when unset.
-  if (!article.featuredImage) {
+  // featuredImage falls back to the journal-default placeholder when its file is
+  // not present yet.
+  if (!article.featuredImageExists) {
     const asset = getImageAsset('journal-default');
     return (
       <div className={cn('relative overflow-hidden bg-cream', ratio)}>

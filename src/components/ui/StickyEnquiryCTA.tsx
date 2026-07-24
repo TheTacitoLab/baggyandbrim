@@ -32,6 +32,9 @@ export function StickyEnquiryCTA({
   const [dismissed, setDismissed] = useState(false);
 
   useEffect(() => {
+    // Session dismissal is client-only; read after mount to avoid a hydration
+    // mismatch.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDismissed(sessionStorage.getItem(DISMISS_KEY) === '1');
   }, []);
 
@@ -54,6 +57,7 @@ export function StickyEnquiryCTA({
   useEffect(() => {
     const anchor = document.querySelector(hideBelowSelector);
     if (!anchor) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAtAnchor(false);
       return;
     }

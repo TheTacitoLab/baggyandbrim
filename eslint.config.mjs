@@ -7,7 +7,9 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   // Accessibility rules enforced in CI, per build spec Section 22 and 28.6.
-  jsxA11y.flatConfigs.recommended,
+  // eslint-config-next already registers the jsx-a11y plugin, so apply only its
+  // recommended rules rather than re-registering the plugin.
+  { rules: jsxA11y.flatConfigs.recommended.rules },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     ".next/**",

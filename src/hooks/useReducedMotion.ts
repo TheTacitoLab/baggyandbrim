@@ -1,21 +1,24 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
+
+const QUERY = '(prefers-reduced-motion: reduce)';
+
+function subscribe(callback: () => void): () => void {
+  const query = window.matchMedia(QUERY);
+  query.addEventListener('change', callback);
+  return () => query.removeEventListener('change', callback);
+}
 
 /**
- * True when the user has requested reduced motion. Independent of the Motion
- * library so non-animated components can branch on it too (build spec 26.4).
+ * True when the user has requested reduced motion. Uses useSyncExternalStore so
+ * there is no setState-in-effect and no hydration mismatch (server assumes no
+ * reduced-motion preference). Independent of the Motion library (build spec 26.4).
  */
 export function useReducedMotion(): boolean {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReduced(query.matches);
-    const onChange = (event: MediaQueryListEvent) => setReduced(event.matches);
-    query.addEventListener('change', onChange);
-    return () => query.removeEventListener('change', onChange);
-  }, []);
-
-  return reduced;
+  return useSyncExternalStore(
+    subscribe,
+    () => window.matchMedia(QUERY).matches,
+    () => false,
+  );
 }

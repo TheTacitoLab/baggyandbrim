@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from 'next';
-import { GoogleAnalytics } from '@next/third-parties/google';
 import './globals.css';
 import { bricolage } from '@/lib/fonts';
 import { env } from '@/lib/env';
@@ -12,6 +11,7 @@ import { SiteHeader } from '@/components/layout/SiteHeader';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { StickyEnquiryCTA } from '@/components/ui/StickyEnquiryCTA';
 import { RevealObserver } from '@/components/ui/RevealObserver';
+import { Analytics } from '@/components/analytics/Analytics';
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <StickyEnquiryCTA href="/enquire" label="Start Your Cap Brief" />
         <RevealObserver />
-        {env.gaId ? <GoogleAnalytics gaId={env.gaId} /> : null}
+        <Analytics gaId={env.gaId} consentRequired={env.consentBannerEnabled} />
       </body>
     </html>
   );

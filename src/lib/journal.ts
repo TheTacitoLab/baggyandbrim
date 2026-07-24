@@ -90,8 +90,16 @@ function loadAll(): JournalArticle[] {
     const reading =
       fm.readingTime && Math.abs(fm.readingTime - computed) <= 2 ? fm.readingTime : computed;
 
+    // A featured image whose file is not present yet falls back to the
+    // journal-default placeholder (build spec Section 14.2), so an article can be
+    // written and published before its photography exists.
+    const featuredImageExists =
+      fm.featuredImage.length > 0 &&
+      fs.existsSync(path.join(process.cwd(), 'public', fm.featuredImage.replace(/^\//, '')));
+
     return {
       ...fm,
+      featuredImageExists,
       readingTime: reading,
       content,
       headings: parseHeadings(content),

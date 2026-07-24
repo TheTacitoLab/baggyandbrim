@@ -1,7 +1,6 @@
 import { HOMEPAGE } from '@/content/homepage';
 import { getLatestArticles } from '@/lib/journal';
 import { SectionLabel } from '@/components/ui/SectionLabel';
-import { ScorebookRule } from '@/components/ui/ScorebookRule';
 import { JournalGrid } from '@/components/journal/JournalGrid';
 import { JournalEmptyState } from '@/components/journal/JournalEmptyState';
 import { TextLink } from '@/components/ui/TextLink';

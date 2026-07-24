@@ -38,7 +38,10 @@ export function SiteHeader() {
 
   // Transparent → solid transition, driven by a sentinel at the base of the hero.
   useEffect(() => {
+    // Solidity depends on the presence and position of a DOM sentinel, so it must
+    // be synced after mount. These fallbacks set the resolved value once.
     if (!overlay) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSolid(true);
       return;
     }

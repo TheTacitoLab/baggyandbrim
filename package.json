@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "check:copy": "node scripts/check-copy.mjs",
+    "check:dupes": "node scripts/check-duplicate-copy.mjs",
+    "check:images": "node scripts/check-images.mjs",
+    "check": "npm run check:copy && npm run check:dupes && npm run check:images"
   },
   "dependencies": {
     "@next/third-parties": "^16.2.11",
