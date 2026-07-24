@@ -1,0 +1,3 @@
+# Journal articles live here as {slug}.mdx (build spec Section 14.1).
+# Dropping a single valid MDX file switches the Journal from its empty state to a
+# fully rendered article with no code changes.

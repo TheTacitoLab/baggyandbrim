@@ -1,0 +1,590 @@
+@import 'tailwindcss';
+
+/* ==========================================================================
+   Baggy & Brim — design tokens
+   Single source of truth for colour, type, motion and layout.
+   Build spec Sections 6, 7, 8, 26, 27.
+   ========================================================================== */
+
+/* Fixed brand palette → Tailwind colour utilities (bg-ink, text-paper, …). */
+@theme {
+  --color-ink: #11110f;
+  --color-paper: #f7f6f1;
+  --color-cream: #e8e0cf;
+  --color-green: #193c2d;
+  --color-red: #711f25;
+  --color-grey: #63615b;
+  --color-grey-muted: #77756f;
+
+  --font-display: var(--font-recoleta), Georgia, 'Times New Roman', serif;
+  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+
+  --breakpoint-xs: 24rem;
+}
+
+/* Surface-aware utilities resolve the *current* data-surface context.
+   `inline` substitutes the value at the use site so bg-surface / text-on-surface
+   follow whichever [data-surface] wrapper they sit inside. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-secondary: var(--on-surface-secondary);
+  --color-rule: var(--rule);
+}
+
+:root {
+  /* Palette (Section 8.1). British spelling used across the surface system. */
+  --colour-ink: #11110f;
+  --colour-paper: #f7f6f1;
+  --colour-cream: #e8e0cf;
+  --colour-green: #193c2d;
+  --colour-red: #711f25;
+  --colour-grey: #63615b;
+  --colour-grey-muted: #77756f;
+  --colour-rule: rgba(17, 17, 15, 0.18);
+  --colour-rule-inverse: rgba(247, 246, 241, 0.22);
+  --colour-focus: #711f25;
+  --colour-focus-inverse: #e8e0cf;
+
+  /* Default surface context (paper). */
+  --surface: var(--colour-paper);
+  --on-surface: var(--colour-ink);
+  --on-surface-secondary: var(--colour-grey);
+  --rule: var(--colour-rule);
+  --focus: var(--colour-focus);
+
+  /* Type scale (Section 7.3). */
+  --type-display-xl: clamp(3.25rem, 9vw, 8.5rem);
+  --type-display-l: clamp(2.5rem, 6vw, 5.5rem);
+  --type-display-m: clamp(1.75rem, 3.5vw, 3rem);
+  --type-heading-l: clamp(2rem, 4vw, 3.25rem);
+  --type-heading-m: clamp(1.5rem, 2.5vw, 2.125rem);
+  --type-heading-s: clamp(1.125rem, 1.6vw, 1.375rem);
+  --type-body-l: clamp(1.0625rem, 1.4vw, 1.3125rem);
+  --type-body-s: 0.875rem;
+  --type-label: 0.75rem;
+  --type-number: clamp(1rem, 1.4vw, 1.125rem);
+
+  /* Motion tokens (Section 26.1). */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 600ms;
+  --duration-reveal: 900ms;
+  --stagger-tight: 60ms;
+  --stagger-base: 90ms;
+  --stagger-loose: 120ms;
+
+  /* Layout (Section 6.3, 27.1). */
+  --page-max: 1440px;
+  --page-pad: 20px;
+  --section-pad: 72px;
+  --header-height: 64px;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --page-pad: 32px;
+  }
+}
+@media (min-width: 768px) {
+  :root {
+    --page-pad: 40px;
+    --section-pad: 96px;
+  }
+}
+@media (min-width: 1024px) {
+  :root {
+    --page-pad: 48px;
+    --header-height: 88px;
+  }
+}
+@media (min-width: 1280px) {
+  :root {
+    --page-pad: 64px;
+    --section-pad: 160px;
+  }
+}
+@media (min-width: 1536px) {
+  :root {
+    --page-pad: 96px;
+  }
+}
+
+/* Surface contexts (Section 8.2). A section sets one data-surface attribute and
+   every child reads var(--surface) / var(--on-surface) / var(--rule). */
+[data-surface='paper'] {
+  --surface: var(--colour-paper);
+  --on-surface: var(--colour-ink);
+  --on-surface-secondary: var(--colour-grey);
+  --rule: var(--colour-rule);
+  --focus: var(--colour-focus);
+}
+[data-surface='ink'] {
+  --surface: var(--colour-ink);
+  --on-surface: var(--colour-paper);
+  --on-surface-secondary: rgba(247, 246, 241, 0.72);
+  --rule: var(--colour-rule-inverse);
+  --focus: var(--colour-focus-inverse);
+}
+[data-surface='cream'] {
+  --surface: var(--colour-cream);
+  --on-surface: var(--colour-ink);
+  --on-surface-secondary: #5a584f;
+  --rule: rgba(17, 17, 15, 0.22);
+  --focus: var(--colour-focus);
+}
+[data-surface='green'] {
+  --surface: var(--colour-green);
+  --on-surface: var(--colour-paper);
+  --on-surface-secondary: rgba(247, 246, 241, 0.76);
+  --rule: var(--colour-rule-inverse);
+  --focus: var(--colour-focus-inverse);
+}
+[data-surface='red'] {
+  --surface: var(--colour-red);
+  --on-surface: var(--colour-paper);
+  --on-surface-secondary: rgba(247, 246, 241, 0.76);
+  --rule: var(--colour-rule-inverse);
+  --focus: var(--colour-focus-inverse);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--header-height) + 16px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    background-color: var(--colour-paper);
+    color: var(--colour-ink);
+    font-family: var(--font-sans);
+    font-weight: 400;
+    line-height: 1.65;
+    font-size: 1rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background-color: var(--colour-green);
+    color: var(--colour-paper);
+  }
+
+  /* One replaced focus style everywhere. Never outline:none without a replacement. */
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+    font-weight: 800;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  /* --- Layout helpers ---------------------------------------------------- */
+  .shell {
+    width: 100%;
+    max-width: var(--page-max);
+    margin-inline: auto;
+    padding-inline: var(--page-pad);
+  }
+  .section-pad {
+    padding-block: var(--section-pad);
+  }
+
+  /* --- Type scale (Section 7.3) ------------------------------------------ */
+  .type-display-xl {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--type-display-xl);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+  .type-display-l {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--type-display-l);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+  }
+  .type-display-m {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: var(--type-display-m);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .type-heading-l {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: var(--type-heading-l);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .type-heading-m {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: var(--type-heading-m);
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+  }
+  .type-heading-s {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: var(--type-heading-s);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .type-body-l {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--type-body-l);
+    line-height: 1.55;
+  }
+  .type-body {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  .type-body-s {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: var(--type-body-s);
+    line-height: 1.5;
+  }
+  .type-label {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--type-label);
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .type-number {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: var(--type-number);
+    line-height: 1;
+    letter-spacing: 0.08em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  @media (min-width: 768px) {
+    .type-body {
+      font-size: 1.0625rem;
+    }
+  }
+
+  /* Optical adjustment while the Recoleta licence is unavailable (Section 7.2).
+     Georgia runs smaller and lighter than Recoleta Black. This single utility
+     lives on <html> and is removed in one commit when Recoleta is supplied. */
+  .font-display-fallback .type-display-xl,
+  .font-display-fallback .type-display-l,
+  .font-display-fallback .type-display-m {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* --- Buttons and links (Section 6.5) ----------------------------------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 48px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--ease-out),
+      color var(--duration-fast) var(--ease-out),
+      opacity var(--duration-fast) var(--ease-out);
+  }
+  .btn-primary {
+    background-color: var(--on-surface);
+    color: var(--surface);
+  }
+  .btn-primary:hover {
+    opacity: 0.88;
+  }
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--on-surface);
+    border: 1px solid var(--rule);
+  }
+  .btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--on-surface) 6%, transparent);
+  }
+
+  /* Text link with a 1px underline offset 6px, drawn from the left on hover. */
+  .text-link {
+    position: relative;
+    display: inline;
+    font-weight: 500;
+    color: var(--on-surface);
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 1px;
+    padding-bottom: 6px;
+  }
+  @media (prefers-reduced-motion: no-preference) and (hover: hover) {
+    .text-link {
+      background-size: 0% 1px;
+      transition: background-size var(--duration-base) var(--ease-out);
+    }
+    .text-link:hover {
+      background-size: 100% 1px;
+    }
+  }
+
+  /* --- Scorebook rule (Section 6.2) -------------------------------------- */
+  .rule-h {
+    width: 100%;
+    height: 1px;
+    background-color: var(--rule);
+    transform-origin: left center;
+  }
+  .rule-v {
+    width: 1px;
+    align-self: stretch;
+    background-color: var(--rule);
+    transform-origin: top center;
+  }
+
+  /* --- Reveal system (Section 26.3.5) ------------------------------------
+     No-JS safe: content is fully visible unless the document has been marked
+     .js-ready by an inline head script, at which point the single RevealObserver
+     client component adds [data-visible] to each element as it enters. A
+     JavaScript failure leaves everything visible at final state. `will-change`
+     is not set here; it is applied by the observer only during the transition. */
+  [data-reveal] {
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      transform var(--duration-slow) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js-ready [data-reveal='up']:not([data-visible]),
+  .js-ready [data-reveal='down']:not([data-visible]),
+  .js-ready [data-reveal='fade']:not([data-visible]),
+  .js-ready [data-reveal='mask']:not([data-visible]) {
+    opacity: 0;
+  }
+  .js-ready [data-reveal='up']:not([data-visible]) {
+    transform: translateY(16px);
+  }
+  .js-ready [data-reveal='down']:not([data-visible]) {
+    transform: translateY(-16px);
+  }
+  .js-ready [data-reveal='mask']:not([data-visible]) {
+    clip-path: inset(100% 0 0 0);
+  }
+  [data-reveal='mask'] {
+    transition:
+      opacity var(--duration-reveal) var(--ease-out),
+      clip-path var(--duration-reveal) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  /* The signature ledger draw: scaleX 0 → 1 from the left. Never reverses. */
+  [data-reveal='rule'] {
+    transform-origin: left center;
+    transition: transform var(--duration-slow) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js-ready [data-reveal='rule']:not([data-visible]) {
+    transform: scaleX(0);
+  }
+  [data-reveal='rule-v'] {
+    transform-origin: top center;
+    transition: transform var(--duration-base) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .js-ready [data-reveal='rule-v']:not([data-visible]) {
+    transform: scaleY(0);
+  }
+
+  /* --- Media frame (Section 9.5) ----------------------------------------
+     Enforces the aspect ratio so no image ever sizes itself. Responsive:
+     --ar-m on mobile, --ar-d from md up. `data-mobile-hidden` drops the frame
+     on small screens for desktop-only overlaps like hero-detail. */
+  .media-frame {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--colour-cream);
+    aspect-ratio: var(--ar-m, var(--ar-d));
+  }
+  @media (min-width: 768px) {
+    .media-frame {
+      aspect-ratio: var(--ar-d);
+    }
+  }
+  .media-frame[data-mobile-hidden='true'] {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .media-frame[data-mobile-hidden='true'] {
+      display: block;
+    }
+  }
+
+  /* --- Enquiry form on the ink surface (Section 15.2) -------------------- */
+  .field-input,
+  .field-textarea {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--colour-rule-inverse);
+    border-radius: 2px 2px 0 0;
+    color: var(--colour-paper);
+    font-family: var(--font-sans);
+    font-size: 16px; /* 16px minimum prevents iOS zoom */
+    line-height: 1.5;
+    padding: 0.75rem 0;
+    transition: border-color var(--duration-fast) var(--ease-out);
+  }
+  .field-input {
+    min-height: 48px;
+  }
+  .field-textarea {
+    resize: vertical;
+  }
+  .field-input::placeholder,
+  .field-textarea::placeholder {
+    color: rgba(247, 246, 241, 0.45);
+  }
+  .field-input:focus,
+  .field-textarea:focus {
+    border-bottom-width: 2px;
+    border-bottom-color: var(--colour-cream);
+  }
+  .field-input[aria-invalid='true'],
+  .field-textarea[aria-invalid='true'] {
+    border-bottom-color: var(--colour-cream);
+  }
+  .field-check {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 48px;
+    cursor: pointer;
+  }
+  .field-check input[type='checkbox'],
+  .field-check input[type='radio'] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--colour-cream);
+    flex-shrink: 0;
+  }
+
+  /* --- FAQ disclosure (Section 13.1) ------------------------------------- */
+  .faq > summary {
+    list-style: none;
+    cursor: pointer;
+  }
+  .faq > summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-icon {
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+  .faq[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  /* --- Utility ----------------------------------------------------------- */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Visually hidden but focusable — used by the skip link. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 100;
+  transform: translateY(-150%);
+  background: var(--colour-ink);
+  color: var(--colour-paper);
+  padding: 0.75rem 1rem;
+  border-radius: 2px;
+  font-weight: 600;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Honeypot: off-screen, never display:none (Section 15.8). */
+.hp-field {
+  position: absolute !important;
+  left: -9999px !important;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Global reduced-motion guarantee — does not depend on JavaScript (Section 26.4). */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
