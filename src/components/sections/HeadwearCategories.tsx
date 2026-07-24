@@ -1,61 +1,51 @@
 import { HOMEPAGE } from '@/content/homepage';
 import type { HeadwearCategory } from '@/types';
-import { SectionLabel } from '@/components/ui/SectionLabel';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
-import { ImageReveal } from '@/components/media/ImageReveal';
+import { InstantFrame } from '@/components/media/InstantFrame';
 import { CtaLink } from '@/components/ui/CtaLink';
 import { Reveal } from '@/components/ui/Reveal';
-import { cn } from '@/lib/utils';
 
 const { headwear } = HOMEPAGE;
 
-const OFFSET_CLASS = ['lg:mt-0', 'lg:mt-12', 'lg:mt-24'];
-const CARD_SIZES = '(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw';
+const CARD_SIZES = '(max-width: 767px) 100vw, 33vw';
 
-function HeadwearCategoryCard({
-  category,
-  offset,
-  delay,
-}: {
-  category: HeadwearCategory;
-  offset: number;
-  delay: number;
-}) {
+/** One category card. The card is a four-row grid — frame, title, body, link —
+ *  that adopts the parent's rows as a subgrid from tablet up, so titles, body
+ *  and links share baselines across the row regardless of copy length. */
+function HeadwearCategoryCard({ category, delay }: { category: HeadwearCategory; delay: number }) {
   return (
     <Reveal
       as="article"
       delay={delay}
-      className={cn('group relative flex flex-col', OFFSET_CLASS[offset])}
+      className="grid grid-rows-[auto_auto_1fr_auto] gap-0 md:row-span-4 md:grid-rows-subgrid"
     >
-      <div className="overflow-hidden">
-        <ImageReveal
-          imageId={category.imageId}
-          sizes={CARD_SIZES}
-          revealDirection="none"
-          frameClassName="transition-transform duration-[600ms] ease-out group-hover:scale-[1.03] motion-reduce:transform-none"
-        />
-      </div>
-      <h3 className="type-heading-s mt-6">{category.title}</h3>
-      <p className="type-label mt-2 text-on-surface-secondary">{category.positioning}</p>
-      <p className="type-body mt-4 max-w-[38ch] text-on-surface">{category.body}</p>
+      <InstantFrame imageId={category.imageId} sizes={CARD_SIZES} revealDirection="none" />
       <div className="mt-6">
-        <ScorebookRule animate={false} />
+        <h3 className="type-heading-s">{category.title}</h3>
+        <p className="type-label mt-2 text-on-surface-secondary">{category.positioning}</p>
       </div>
-      <div className="mt-5">
-        <CtaLink
-          href={category.href}
-          event="headwear_category_click"
-          params={{ category: category.slug, location: 'homepage' }}
-          className="text-link after:absolute after:inset-0 after:content-['']"
-        >
-          {category.linkLabel}
-        </CtaLink>
+      <p className="type-body mt-4 text-on-surface">{category.body}</p>
+      <div>
+        <div className="mt-6">
+          <ScorebookRule animate={false} />
+        </div>
+        <div className="mt-5">
+          <CtaLink
+            href={category.href}
+            event="headwear_category_click"
+            params={{ category: category.slug, location: 'homepage' }}
+            className="text-link"
+          >
+            {category.linkLabel}
+          </CtaLink>
+        </div>
       </div>
     </Reveal>
   );
 }
 
-/** Section 4. Three-column editorial image grid; the primary internal-link path. */
+/** Headwear (Revision surface: paper). Mode B: flush-left heading and intro, a
+ *  perfectly aligned three-across image row, and one primary CTA. */
 export function HeadwearCategories() {
   return (
     <section
@@ -66,27 +56,32 @@ export function HeadwearCategories() {
       className="bg-paper outline-none"
     >
       <div className="shell section-pad">
-        <div className="max-w-[42ch]">
-          <SectionLabel number={headwear.number}>{headwear.label}</SectionLabel>
+        <div className="max-w-[68ch]">
           <Reveal>
-            <h2 id="headwear-heading" className="type-heading-l mt-5">
+            <h2 id="headwear-heading" className="type-heading-l">
               {headwear.heading}
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="type-body-l mt-5 text-on-surface-secondary">{headwear.intro}</p>
+            <p className="type-body-l mt-4 md:mt-6 text-on-surface-secondary">{headwear.intro}</p>
           </Reveal>
         </div>
 
-        <div className="mt-14 grid grid-cols-1 gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3 lg:items-start">
+        <div className="mt-8 grid grid-cols-1 gap-x-4 gap-y-12 md:mt-12 md:grid-cols-3 md:gap-x-6 md:grid-rows-[auto_auto_1fr_auto] lg:gap-x-8">
           {headwear.categories.map((category, index) => (
-            <HeadwearCategoryCard
-              key={category.slug}
-              category={category}
-              offset={index}
-              delay={index * 120}
-            />
+            <HeadwearCategoryCard key={category.slug} category={category} delay={index * 120} />
           ))}
+        </div>
+
+        <div className="mt-8 md:mt-10 lg:mt-12">
+          <CtaLink
+            href={headwear.cta.href}
+            event="cta_section_click"
+            params={{ section: 'headwear' }}
+            className="btn btn-primary"
+          >
+            {headwear.cta.label}
+          </CtaLink>
         </div>
       </div>
     </section>

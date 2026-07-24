@@ -28,9 +28,9 @@ export function scrollToHash(hash: string) {
 export function SiteHeader() {
   const pathname = usePathname();
   const isHome = pathname === '/';
-  // Overlay (transparent over the dark full-bleed hero) applies only on the
-  // homepage. Every other page has a paper hero, so the header is solid at once.
-  const overlay = isHome;
+  // Every page now has a paper hero (Revision 6), so the header is solid on every
+  // page. The transparent-over-dark-hero overlay was retired with the old hero.
+  const overlay = false;
   const [solid, setSolid] = useState(!overlay);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -81,8 +81,9 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-colors duration-200',
+        'fixed inset-x-0 top-0 z-50 border-b transition-colors duration-200',
         solid ? 'bg-paper text-ink' : 'bg-transparent text-paper',
+        scrolled && solid ? 'border-[color:var(--colour-rule)]' : 'border-transparent',
       )}
       data-surface={light ? 'ink' : 'paper'}
       style={{ height: 'var(--header-height)' }}
@@ -156,15 +157,6 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
-
-      {/* Bottom hairline, revealed after 24px of scroll. */}
-      <span
-        aria-hidden="true"
-        className={cn(
-          'absolute inset-x-0 bottom-0 h-px origin-left bg-[color:var(--colour-rule)] transition-opacity duration-200',
-          scrolled && solid ? 'opacity-100' : 'opacity-0',
-        )}
-      />
 
       <MobileMenu isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
     </header>

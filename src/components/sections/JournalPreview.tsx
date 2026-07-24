@@ -27,15 +27,15 @@ export function JournalPreview() {
     >
       <div className="shell section-pad">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-[46ch]">
-            <SectionLabel number={journal.number}>{journal.label}</SectionLabel>
+          <div className="max-w-[68ch]">
+            <SectionLabel>{journal.label}</SectionLabel>
             <Reveal>
-              <h2 id="journal-heading" className="type-heading-l mt-5">
+              <h2 id="journal-heading" className="type-heading-l mt-4">
                 {journal.heading}
               </h2>
             </Reveal>
             <Reveal delay={80}>
-              <p className="type-body-l mt-5 text-on-surface-secondary">{journal.intro}</p>
+              <p className="type-body-l mt-4 md:mt-6 text-on-surface-secondary">{journal.intro}</p>
             </Reveal>
           </div>
           {hasArticles && (
@@ -45,7 +45,7 @@ export function JournalPreview() {
           )}
         </div>
 
-        <div className="mt-12">
+        <div className="mt-8 md:mt-12">
           {hasArticles ? (
             <JournalGrid articles={articles} showExcerpt={false} location="homepage" />
           ) : (

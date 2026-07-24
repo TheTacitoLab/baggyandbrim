@@ -67,6 +67,9 @@ const occasions: Occasion[] = [
   },
 ];
 
+// Revision 9.2: six confirmed decisions. Fabric, trim, presentation and
+// packaging fold into a single closing sentence rather than four ruled rows,
+// two of which were unconfirmed placeholders.
 const options: CustomisationOption[] = [
   {
     name: 'Silhouette and cap shape',
@@ -98,80 +101,52 @@ const options: CustomisationOption[] = [
     detail: 'Woven or printed labels inside the cap, including club name and year.',
     confirmed: true,
   },
-  // TODO-10: fabric compositions per style. Renders 'Details confirmed on enquiry'.
-  { name: 'Fabric choice', detail: null, confirmed: false },
-  {
-    name: 'Trim and finishing',
-    detail: 'Sweatbands, taping, button and eyelet finishing.',
-    confirmed: true,
-  },
-  {
-    name: 'Presentation details',
-    detail: 'Boxing, tissue, cards and named packaging for presentation runs.',
-    confirmed: true,
-  },
-  // TODO-11: packaging options / custom boxes. Renders 'Details confirmed on enquiry'.
-  { name: 'Packaging', detail: null, confirmed: false },
 ];
 
 export const HOMEPAGE = {
   hero: {
     eyebrow: 'Custom cricket headwear',
-    displayLine: 'Old Heads. New Game.',
+    displayLines: ['Old Heads.', 'New Game.'] as [string, string],
+    // Retained for SEO fallbacks; the homepage H1 renders only the display lines.
     headline: 'Custom cricket caps, sun hats and performance headwear',
     intro:
-      'Made to order for cricket clubs, schools, organisations and brands. Baggy caps for the ceremony, sun hats for the long days, performance caps for everything in between.',
+      'Baggy caps, sun hats and performance caps, made to order for cricket clubs, schools and organisations.',
     primaryCta: { label: 'Start Your Cap Brief', href: '#enquire' },
     secondaryCta: { label: 'Explore the Headwear', href: '#headwear' },
     microLine:
       'Runs from 12 caps. Selected projects delivered from two weeks after design approval.',
     imageId: 'hero-primary',
-    detailImageId: 'hero-detail',
   },
+  // Revision 9.1: a held breath between the hero and the product. Mode A, ink.
   brand: {
-    label: 'The idea',
-    number: '01',
-    headline: 'We only make cricket headwear.',
-    body: [
-      'Most kit suppliers treat the cap as the last line on the order form. We start there.',
-      'Baggy & Brim exists for the caps clubs keep. The one handed over on debut. The one that survives fifteen seasons in the field and three changes of captain. The one that comes out of a drawer at the anniversary dinner and still means something.',
-      'The game has moved on. Formats, fabrics, fixtures, all of it. The cap has quietly stayed the same, which is exactly why it still carries weight.',
-    ],
-    closingLine: 'Old heads, new game. We keep the ceremony and remove the admin.',
-    imageId: 'statement-ground',
+    heading: 'We only make cricket headwear.',
+    body: 'Not kit. Not equipment. The caps clubs keep: handed over on debut, worn for fifteen seasons, brought out again at the anniversary dinner.',
   },
   headwear: {
-    label: 'Headwear',
-    number: '02',
     heading: 'Three caps. One club identity.',
     intro:
       'Different days need different headwear. We make all three properly, in your colours, with your crest.',
     categories,
+    cta: { label: 'See the full range', href: '/custom-cricket-caps' },
   },
   occasions: {
-    label: 'Occasions',
-    number: '03',
     heading: 'A cap is rarely just a cap.',
     intro: 'Clubs commission headwear for five reasons. Only one of them is uniform.',
     occasions,
-    closingLine: 'If it is worth marking, it is worth putting on a cap.',
-    footerLink: { label: 'See how presentation caps work', href: '/cricket-presentation-caps' },
+    cta: { label: 'See how presentation caps work', href: '/cricket-presentation-caps' },
     imageId: 'occasions-honours',
   },
   product: {
-    label: 'The cap',
-    number: '04',
     heading: 'Specified properly, not picked from a catalogue.',
     intro:
       'Every brief is built from the same set of decisions. Choose as many or as few as you want. We will make the rest sensible.',
     options,
-    closingLine: 'If you have a crest, a colour and a number in mind, that is enough to start.',
+    closingLine:
+      'Fabric, trim, packaging and presentation details are set once we know what the caps are for.',
     imageIdPrimary: 'product-construction',
     imageIdSecondary: 'product-stack',
   },
   characters: {
-    label: 'Old heads',
-    number: '05',
     headline: 'One keeps the scorebook. One loses the pencil.',
     body: [
       'Baggy has views on collars, walking before you are given, and the correct way to fold a jumper. Brim has views on tea, and not many others.',
@@ -185,8 +160,6 @@ export const HOMEPAGE = {
     mobileImageId: 'character-scene-mobile',
   },
   process: {
-    label: 'Process',
-    number: '06',
     heading: 'Four steps. We handle the middle two.',
     steps: PROCESS_STEPS,
     note: 'Timings depend on design approval, product specification, quantity, production capacity and delivery location. We confirm dates once we have seen the brief.',
@@ -197,16 +170,15 @@ export const HOMEPAGE = {
   },
   volumes: {
     label: 'Volumes',
-    number: '07',
     heading: 'From a first eleven to a full club.',
     intro: 'Runs start at twelve. Tell us the bracket and we will tell you what is realistic.',
     brackets: VOLUME_BRACKETS,
     note: 'Pricing is confirmed on enquiry, once the specification is clear.',
+    cta: { label: 'Start Your Cap Brief', href: '#enquire' },
     imageId: 'volumes-team',
   },
   journal: {
     label: 'Journal',
-    number: '08',
     heading: 'The Journal',
     intro:
       'Notes on cap design, club traditions, embroidery, cap numbers, and how to get an order right first time.',
@@ -231,8 +203,6 @@ export const HOMEPAGE = {
     ],
   },
   enquiry: {
-    label: 'Enquire',
-    number: '09',
     heading: 'Start Your Cap Brief',
     supporting: [
       'Five fields and a date. Tell us what you need and we will come back with options, a specification and a realistic timeline.',

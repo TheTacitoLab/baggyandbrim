@@ -1,17 +1,29 @@
 import Link from 'next/link';
+import type { Surface } from '@/types';
 import { COMMERCIAL_LINKS } from '@/content/navigation';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
 
-/** Section 13 step 13. Ruled row to the other commercial pages, one line each. */
-export function RelatedHeadwear({ currentHref }: { currentHref: string }) {
+/** A ruled row linking the other commercial pages, one line each. The surface is
+ *  planned by the page ladder (Revision 1.4). */
+export function RelatedHeadwear({
+  currentHref,
+  surface = 'paper',
+}: {
+  currentHref: string;
+  surface?: Surface;
+}) {
   const links = COMMERCIAL_LINKS.filter((link) => link.href !== currentHref);
   return (
-    <section aria-labelledby="related-headwear-heading" data-surface="paper" className="bg-paper">
+    <section
+      aria-labelledby="related-headwear-heading"
+      data-surface={surface}
+      className="bg-surface text-on-surface"
+    >
       <div className="shell section-pad">
-        <h2 id="related-headwear-heading" className="type-heading-m">
+        <h2 id="related-headwear-heading" className="type-heading-l">
           More headwear
         </h2>
-        <ul className="mt-8">
+        <ul className="mt-8 md:mt-12">
           {links.map((link) => (
             <li key={link.href}>
               <ScorebookRule animate={false} />

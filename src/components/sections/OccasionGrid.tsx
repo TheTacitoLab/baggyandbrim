@@ -1,91 +1,70 @@
 import { Fragment } from 'react';
 import { HOMEPAGE } from '@/content/homepage';
-import { SectionLabel } from '@/components/ui/SectionLabel';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
-import { ImageReveal } from '@/components/media/ImageReveal';
-import { FillImage } from '@/components/media/FillImage';
-import { TextLink } from '@/components/ui/TextLink';
+import { InstantFrame } from '@/components/media/InstantFrame';
+import { CtaLink } from '@/components/ui/CtaLink';
 import { Reveal } from '@/components/ui/Reveal';
 
 const { occasions: content } = HOMEPAGE;
 
-/** Section 5. The emotional centre: a tight scorebook ledger on cream, where the
- *  ruling device does the most work, with one image breaking the grid. */
+/** Occasions (surface: green). Mode B: a flush-left ruled ledger where the rules
+ *  do the structural work, one framed editorial image inside the container, and
+ *  one primary CTA. No overlapping image, no offset columns. */
 export function OccasionGrid() {
   return (
     <section
       id="occasions"
-      data-surface="cream"
+      data-surface="green"
       aria-labelledby="occasions-heading"
       tabIndex={-1}
-      className="bg-cream text-on-surface outline-none"
+      className="bg-green text-on-surface outline-none"
     >
       <div className="shell section-pad">
-        <div className="max-w-[42ch]">
-          <SectionLabel number={content.number}>{content.label}</SectionLabel>
+        <div className="max-w-[68ch]">
           <Reveal>
-            <h2 id="occasions-heading" className="type-heading-l mt-5">
+            <h2 id="occasions-heading" className="type-heading-l">
               {content.heading}
             </h2>
           </Reveal>
           <Reveal delay={80}>
-            <p className="type-body-l mt-5 text-on-surface-secondary">{content.intro}</p>
+            <p className="type-body-l mt-4 md:mt-6 text-on-surface-secondary">{content.intro}</p>
           </Reveal>
         </div>
 
-        {/* Desktop ledger with an overlapping image over rows two to four. */}
-        <div className="relative mt-14 hidden lg:block">
-          <div className="grid grid-cols-12">
-            {content.occasions.map((occasion, index) => (
-              <Fragment key={occasion.name}>
-                <div className="col-span-12">
-                  <ScorebookRule delay={index * 80} />
-                </div>
-                <h3 className="type-heading-m col-span-3 py-8">{occasion.name}</h3>
-                <p className="type-body col-span-5 col-start-5 py-8 text-on-surface">
-                  {occasion.description}
-                </p>
-                <span className="type-number col-span-1 col-start-12 self-start py-8 text-right text-on-surface-secondary">
-                  {occasion.number}
-                </span>
-              </Fragment>
-            ))}
-            <div className="col-span-12">
-              <ScorebookRule delay={content.occasions.length * 80} />
-            </div>
-          </div>
-          <div className="pointer-events-none absolute right-0 top-[19%] z-10 h-[56%] w-[32%]">
-            <FillImage imageId={content.imageId} sizes="32vw" className="h-full w-full" />
-          </div>
-        </div>
-
-        {/* Mobile stack: name above description, number inline, image after row two. */}
-        <div className="mt-12 lg:hidden">
+        <div className="mt-8 md:mt-12">
           {content.occasions.map((occasion, index) => (
             <Fragment key={occasion.name}>
-              <ScorebookRule />
-              <div className="flex items-baseline justify-between pt-5">
-                <h3 className="type-heading-s">{occasion.name}</h3>
-                <span className="type-number text-on-surface-secondary">{occasion.number}</span>
-              </div>
-              <p className="type-body pb-6 pt-2 text-on-surface">{occasion.description}</p>
-              {index === 1 && (
-                <div className="pb-6">
-                  <ImageReveal imageId={content.imageId} sizes="100vw" />
+              <ScorebookRule delay={index * 60} />
+              <div className="grid grid-cols-1 gap-1 py-6 md:grid-cols-12 md:gap-8">
+                <div className="flex items-baseline justify-between md:col-span-3 md:block">
+                  <h3 className="type-heading-s md:type-heading-m">{occasion.name}</h3>
+                  <span className="type-number text-on-surface-secondary md:hidden">
+                    {occasion.number}
+                  </span>
                 </div>
-              )}
+                <p className="type-body text-on-surface md:col-span-7">{occasion.description}</p>
+                <span className="hidden type-number text-on-surface-secondary md:col-span-2 md:block md:text-right">
+                  {occasion.number}
+                </span>
+              </div>
             </Fragment>
           ))}
           <ScorebookRule />
         </div>
 
-        <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <Reveal>
-            <p className="type-body-l max-w-[40ch]">{content.closingLine}</p>
-          </Reveal>
-          <TextLink href={content.footerLink.href} withArrow>
-            {content.footerLink.label}
-          </TextLink>
+        <div className="mt-8 md:mt-12">
+          <InstantFrame imageId={content.imageId} sizes="(max-width: 1023px) 100vw, 1000px" />
+        </div>
+
+        <div className="mt-8 md:mt-10 lg:mt-12">
+          <CtaLink
+            href={content.cta.href}
+            event="cta_section_click"
+            params={{ section: 'occasions' }}
+            className="btn btn-primary"
+          >
+            {content.cta.label}
+          </CtaLink>
         </div>
       </div>
     </section>

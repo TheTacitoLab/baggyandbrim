@@ -20,19 +20,21 @@ export function EnquiryCtaBand({ heading, line, section, labelledById = 'enquiry
       aria-labelledby={labelledById}
       className="bg-ink text-paper"
     >
-      <div className="shell section-pad flex flex-col items-start gap-6 md:items-center md:text-center">
-        <h2 id={labelledById} className="type-heading-l max-w-[20ch]">
-          {heading}
-        </h2>
-        <p className="type-body-l max-w-[48ch] text-on-surface-secondary">{line}</p>
-        <CtaLink
-          href="/enquire"
-          event="cta_section_click"
-          params={{ section }}
-          className="btn btn-primary"
-        >
-          Start Your Cap Brief
-        </CtaLink>
+      <div className="shell section-pad">
+        <div className="mx-auto flex max-w-[52ch] flex-col items-center gap-6 text-center">
+          <h2 id={labelledById} className="type-heading-l">
+            {heading}
+          </h2>
+          <p className="type-body-l text-on-surface-secondary">{line}</p>
+          <CtaLink
+            href="/enquire"
+            event="cta_section_click"
+            params={{ section }}
+            className="btn btn-primary"
+          >
+            Start Your Cap Brief
+          </CtaLink>
+        </div>
       </div>
     </section>
   );

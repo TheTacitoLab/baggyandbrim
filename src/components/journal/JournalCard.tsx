@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { getImageAsset } from '@/content/assets/image-manifest';
-import { Placeholder } from '@/components/media/Placeholder';
+import { FramePlaceholder } from '@/components/media/InstantFrame';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
 import { CtaLink } from '@/components/ui/CtaLink';
 import { formatDate, cn } from '@/lib/utils';
@@ -13,33 +13,31 @@ interface JournalCardProps {
   location?: string; // analytics
 }
 
-const RATIO: Record<NonNullable<JournalCardProps['variant']>, string> = {
-  featured: 'aspect-video',
-  grid: 'aspect-[3/2]',
-  compact: 'aspect-[3/2]',
-};
+// Journal cards are 3:2 and always framed (Revision 5.2, 8.5).
+const RATIO = 'aspect-[3/2]';
 
-function CardImage({ article, ratio }: { article: JournalArticle; ratio: string }) {
-  // featuredImage falls back to the journal-default placeholder when its file is
-  // not present yet.
-  if (!article.featuredImageExists) {
-    const asset = getImageAsset('journal-default');
-    return (
-      <div className={cn('relative overflow-hidden bg-cream', ratio)}>
-        <Placeholder asset={asset} />
-      </div>
-    );
-  }
+function CardImage({ article }: { article: JournalArticle }) {
+  const exists = article.featuredImageExists;
+  const asset = getImageAsset('journal-default');
   return (
-    <div className={cn('relative overflow-hidden bg-cream', ratio)}>
-      <Image
-        src={article.featuredImage}
-        alt={article.featuredImageAlt}
-        fill
-        sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
-        quality={78}
-        className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.02] motion-reduce:transform-none"
-      />
+    <div className="instant-frame">
+      <div className={cn('media-frame instant-frame__well', RATIO)}>
+        {exists ? (
+          <Image
+            src={article.featuredImage}
+            alt={article.featuredImageAlt}
+            fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 33vw"
+            quality={78}
+            className="object-cover transition-transform duration-[600ms] ease-out group-hover:scale-[1.02] motion-reduce:transform-none"
+          />
+        ) : (
+          <FramePlaceholder subject={asset.subject} />
+        )}
+      </div>
+      <p className={cn('instant-frame__chin', !exists ? undefined : 'instant-frame__chin--empty')}>
+        {exists ? '' : `${asset.subject} 3:2`}
+      </p>
     </div>
   );
 }
@@ -52,17 +50,14 @@ export function JournalCard({
 }: JournalCardProps) {
   const headingClass = variant === 'featured' ? 'type-heading-l' : 'type-heading-s';
   return (
-    <article className="group relative flex flex-col">
-      <div className="overflow-hidden">
-        <CardImage article={article} ratio={RATIO[variant]} />
-      </div>
+    <article className="group flex flex-col">
+      <CardImage article={article} />
       <p className="type-label mt-5 text-on-surface-secondary">{article.category}</p>
       <h3 className={cn('mt-3', headingClass)}>
         <CtaLink
           href={`/journal/${article.slug}`}
           event="journal_article_click"
           params={{ slug: article.slug, location }}
-          className="after:absolute after:inset-0 after:content-['']"
         >
           {article.title}
         </CtaLink>
