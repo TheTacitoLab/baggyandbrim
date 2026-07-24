@@ -51,7 +51,9 @@ export default function EnquirePage() {
                 <p className="type-body-s py-4">{item}</p>
               </li>
             ))}
-            <ScorebookRule />
+            <li aria-hidden="true">
+              <ScorebookRule />
+            </li>
           </ul>
         </div>
 

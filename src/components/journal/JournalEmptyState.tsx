@@ -31,7 +31,9 @@ export function JournalEmptyState({ clusters, closingLine, cta }: JournalEmptySt
             </div>
           </li>
         ))}
-        <ScorebookRule />
+        <li aria-hidden="true">
+          <ScorebookRule />
+        </li>
       </ul>
       <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="type-body-l max-w-[52ch]">{closingLine}</p>

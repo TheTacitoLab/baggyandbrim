@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           <h1 id="privacy-heading" className="type-heading-l">
             Privacy Policy
           </h1>
-          <p className="type-body-s mt-4 text-[color:var(--colour-grey-muted)]">
+          <p className="type-body-s mt-4 text-on-surface-secondary">
             The full policy is being finalised before launch. What follows describes how the
             enquiry form handles your information today.
           </p>

@@ -47,7 +47,9 @@ export function RelatedLinks({ heading, links, variant = 'ruled' }: RelatedLinks
             </Link>
           </li>
         ))}
-        <ScorebookRule animate={false} />
+        <li aria-hidden="true">
+          <ScorebookRule animate={false} />
+        </li>
       </ul>
     </nav>
   );

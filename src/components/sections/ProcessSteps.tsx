@@ -61,7 +61,9 @@ export function ProcessSteps({
                 </div>
               </li>
             ))}
-            <ScorebookRule />
+            <li aria-hidden="true">
+              <ScorebookRule />
+            </li>
           </ol>
         </div>
       </section>
@@ -117,7 +119,9 @@ export function ProcessSteps({
               )}
             </Fragment>
           ))}
-          <ScorebookRule />
+          <li aria-hidden="true">
+            <ScorebookRule />
+          </li>
         </ol>
 
         {note && <p className="type-body-s mt-6 max-w-[60ch] text-on-surface-secondary">{note}</p>}

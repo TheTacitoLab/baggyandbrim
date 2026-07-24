@@ -22,7 +22,7 @@ export default function TermsPage() {
           <h1 id="terms-heading" className="type-heading-l">
             Terms
           </h1>
-          <p className="type-body-s mt-4 text-[color:var(--colour-grey-muted)]">
+          <p className="type-body-s mt-4 text-on-surface-secondary">
             The full terms are being finalised before launch.
           </p>
           <p className="type-body mt-8 text-on-surface">

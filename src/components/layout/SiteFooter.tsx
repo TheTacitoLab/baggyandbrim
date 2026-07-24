@@ -14,7 +14,7 @@ function ContactValue({ label, value, href }: { label: string; value: string | n
       ) : (
         // Placeholders render as plain 'Coming soon' text — never broken links or
         // invented handles (build spec Section 12, 10.5).
-        <span className="type-body text-[color:var(--colour-grey-muted)]">Coming soon</span>
+        <span className="type-body text-on-surface-secondary">Coming soon</span>
       )}
     </li>
   );

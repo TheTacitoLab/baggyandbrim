@@ -30,7 +30,9 @@ export function RelatedHeadwear({ currentHref }: { currentHref: string }) {
               </Link>
             </li>
           ))}
-          <ScorebookRule animate={false} />
+          <li aria-hidden="true">
+            <ScorebookRule animate={false} />
+          </li>
         </ul>
       </div>
     </section>

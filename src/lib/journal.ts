@@ -146,6 +146,11 @@ export function getRelatedArticles(article: JournalArticle, limit: number): Jour
   return [...sameCategory, ...rest].slice(0, limit);
 }
 
+/** Published articles that support a given commercial page (Section 21.2). */
+export function getArticlesForCommercialPage(path: string): JournalArticle[] {
+  return getAllArticles().filter((article) => article.relatedCommercialPage === path);
+}
+
 export function getCategories(): { category: JournalCategory; count: number }[] {
   const counts = new Map<JournalCategory, number>();
   for (const article of getAllArticles()) {

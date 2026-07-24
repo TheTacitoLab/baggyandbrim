@@ -83,7 +83,9 @@ function KeyPoints({ heading = 'Key points', items = '' }: { heading?: string; i
             <p className="type-body py-3">{point}</p>
           </li>
         ))}
-        <ScorebookRule animate={false} />
+        <li aria-hidden="true">
+          <ScorebookRule animate={false} />
+        </li>
       </ul>
     </aside>
   );

@@ -11,7 +11,7 @@ export default function NotFound() {
   return (
     <section data-surface="ink" className="min-h-[75vh] bg-ink text-paper">
       <div className="shell section-pad pt-[calc(var(--header-height)+4rem)]">
-        <p className="type-display-xl">404</p>
+        <h1 className="type-display-xl">404</h1>
         <p className="type-body-l mt-8 max-w-[42ch]">
           That page has been retired. Try the headwear, the Journal, or start a brief.
         </p>
@@ -24,7 +24,9 @@ export default function NotFound() {
               </Link>
             </li>
           ))}
-          <ScorebookRule animate={false} />
+          <li aria-hidden="true">
+            <ScorebookRule animate={false} />
+          </li>
         </ul>
       </div>
     </section>

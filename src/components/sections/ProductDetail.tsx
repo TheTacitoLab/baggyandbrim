@@ -47,8 +47,8 @@ export function ProductDetail() {
                     className={cn(
                       'type-body-s mt-1',
                       option.detail
-                        ? 'text-on-surface-secondary'
-                        : 'text-[color:var(--colour-grey-muted)]',
+                        ? 'text-on-surface'
+                        : 'text-on-surface-secondary',
                     )}
                   >
                     {option.detail ?? 'Details confirmed on enquiry'}
@@ -56,7 +56,9 @@ export function ProductDetail() {
                 </div>
               </li>
             ))}
-            <ScorebookRule />
+            <li aria-hidden="true">
+              <ScorebookRule />
+            </li>
           </ul>
         </div>
 

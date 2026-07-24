@@ -1,7 +1,9 @@
 import type { CommercialBlock, CommercialPageContent, Surface } from '@/types';
 import { PAGE_SEO, type SeoPath } from '@/content/seo';
 import { PROCESS_STEPS, VOLUME_BRACKETS } from '@/content/site';
+import { getArticlesForCommercialPage } from '@/lib/journal';
 import { breadcrumbSchema, faqSchema } from '@/lib/schema';
+import { RelatedLinks } from '@/components/ui/RelatedLinks';
 import { cn } from '@/lib/utils';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
@@ -107,8 +109,8 @@ function renderBlock(block: CommercialBlock, index: number, accent: 'green' | 'r
                     className={cn(
                       'type-body-s mt-1',
                       option.detail
-                        ? 'text-on-surface-secondary'
-                        : 'text-[color:var(--colour-grey-muted)]',
+                        ? 'text-on-surface'
+                        : 'text-on-surface-secondary',
                     )}
                   >
                     {option.detail ?? 'Details confirmed on enquiry'}
@@ -239,6 +241,11 @@ export function CommercialPage({ content }: { content: CommercialPageContent }) 
   const path = `/${content.slug}`;
   const seo = PAGE_SEO[path as SeoPath];
   const breadcrumbs = [{ label: 'Home', href: '/' }, { label: seo?.title ?? content.h1 }];
+  const journalLinks = getArticlesForCommercialPage(path).map((article) => ({
+    label: article.title,
+    href: `/journal/${article.slug}`,
+    description: article.excerpt,
+  }));
 
   return (
     <>
@@ -259,6 +266,16 @@ export function CommercialPage({ content }: { content: CommercialPageContent }) 
       />
 
       {content.blocks.map((block, index) => renderBlock(block, index, content.accent))}
+
+      {/* Related Journal links (Section 13.1 step 10). Renders nothing until a
+          matching article exists — never an empty heading. */}
+      {journalLinks.length > 0 && (
+        <section data-surface="cream" aria-label="From the Journal" className="bg-cream">
+          <div className="shell section-pad">
+            <RelatedLinks heading="From the Journal" links={journalLinks} />
+          </div>
+        </section>
+      )}
 
       <section data-surface="paper" aria-labelledby="faq-heading" className="bg-paper">
         <div className="shell section-pad">
