@@ -13,16 +13,15 @@ export const IMAGE_MANIFEST: ImageAsset[] = [
   // --- Hero -----------------------------------------------------------------
   {
     id: 'hero-primary',
-    src: null,
-    alt: 'Custom embroidered baggy cricket cap for a cricket club, held against a pavilion wall',
-    subject:
-      'A single navy baggy cap held in one hand against a pavilion wall, or worn, shot from just below eye level.',
-    crop: 'In the instant frame, right column of the hero. Crop tight enough that the crest is legible.',
-    treatment: 'Warm light, hard shadow.',
+    src: '/images/hero-primary.jpg',
+    alt: 'Cricketer wearing a custom embroidered baggy cricket cap in dark navy with red piping and a club crest',
+    subject: 'Studio portrait: player in a navy baggy cap with red piping, crest legible, front on.',
+    crop: 'In the instant frame, right column of the hero. Face centred, so the 4:5 mobile crop holds.',
+    treatment: 'Neutral studio grey, editorial grade.',
     aspectDesktop: '4:3',
     aspectMobile: '4:5',
-    width: 1600,
-    height: 1200,
+    width: 1440,
+    height: 1080,
     decorative: false,
     priority: true,
   },
