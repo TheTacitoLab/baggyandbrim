@@ -83,7 +83,7 @@ export default function JournalIndexPage() {
       </section>
 
       <EnquiryCtaBand
-        heading="Start Your Cap Brief"
+        heading="Start Your Headwear Brief"
         line="Notes are one thing. If you have a cap in mind, the quickest answer comes from a brief."
         section="journal"
       />

@@ -48,7 +48,7 @@ export function renderBrandOg({
             style={{
               display: 'flex',
               fontSize: title.length > 44 ? 60 : 84,
-              fontWeight: 800,
+              fontWeight: 700,
               lineHeight: 1.05,
               letterSpacing: '-0.02em',
               maxWidth: 1040,

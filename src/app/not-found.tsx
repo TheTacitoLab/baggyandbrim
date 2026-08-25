@@ -6,7 +6,7 @@ export default function NotFound() {
   const links = [
     ...COMMERCIAL_LINKS,
     { label: 'The Journal', href: '/journal', description: undefined },
-    { label: 'Start Your Cap Brief', href: '/enquire', description: undefined },
+    { label: 'Start Your Headwear Brief', href: '/enquire', description: undefined },
   ];
   return (
     <section data-surface="ink" className="min-h-[75vh] bg-ink text-paper">

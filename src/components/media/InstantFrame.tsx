@@ -74,14 +74,11 @@ export function InstantFrame({
     ...(arMobile ? { '--ar-m': arMobile } : {}),
   } as CSSProperties;
 
-  // A working note for the photographer while the image is a placeholder: the
-  // subject, the crop and the aspect ratio (Revision 8.2). Once a real file
-  // lands the chin carries the caption instead, or collapses when there is none.
-  const shotNote = [asset.subject, asset.crop, effectiveDesktop]
-    .map((value) => value?.trim())
-    .filter(Boolean)
-    .join(' ');
-  const chinText = hasImage ? caption : shotNote;
+  // The chin carries a caption only when a real image exists and a caption is
+  // passed; otherwise it collapses to the reduced empty height. Shot notes stay
+  // in the manifest for the photographer and are never rendered (brief
+  // Section 5: the image stands cleanly on its own).
+  const chinText = hasImage ? caption : undefined;
 
   return (
     <div className={cn('instant-frame', className)}>

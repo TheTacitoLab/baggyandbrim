@@ -8,12 +8,12 @@ export const customCricketCaps: CommercialPageContent = {
   slug: 'custom-cricket-caps',
   intent: 'Broad commercial research into commissioning custom cricket caps.',
   accent: 'green',
-  h1: 'Custom Cricket Caps for Clubs, Schools and Organisations',
+  h1: 'Custom Cricket Caps for Clubs, Schools and Teams',
   heroEyebrow: 'Custom cricket headwear',
   heroIntro:
-    'Baggy caps, sun hats and performance caps, made to order in your club colours with your crest embroidered where you want it. Runs start at twelve.',
+    'Baggy caps, presentation caps and wide-brim sun hats, made to order in your club colours with your crest embroidered where you want it. Minimum order 12.',
   heroImageId: 'lp-hero-custom',
-  primaryCta: { label: 'Start Your Cap Brief', href: '/enquire' },
+  primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See how the process works', href: '/#process' },
   blocks: [
     {
@@ -37,18 +37,18 @@ export const customCricketCaps: CommercialPageContent = {
           linkLabel: 'Baggy caps',
         },
         {
-          style: 'Sun hats',
+          style: 'Presentation caps',
+          bestFor: 'Awards evenings, touring sides, officials, club presentation',
+          character: 'Structured, smart, made to be kept',
+          href: '/cricket-presentation-caps',
+          linkLabel: 'Presentation caps',
+        },
+        {
+          style: 'Wide-brim sun hats',
           bestFor: 'Long days in the field, whole-squad protection, juniors',
           character: 'Wide brim, practical, unmistakably cricket',
           href: '/cricket-sun-hats',
-          linkLabel: 'Sun hats',
-        },
-        {
-          style: 'Performance caps',
-          bestFor: 'Training, travel, coaching, everyday club wear',
-          character: 'Lightweight, modern fit, worn constantly',
-          href: '/performance-cricket-caps',
-          linkLabel: 'Performance caps',
+          linkLabel: 'Wide-brim sun hats',
         },
       ],
     },
@@ -69,7 +69,7 @@ export const customCricketCaps: CommercialPageContent = {
       options: [
         {
           name: 'Style',
-          detail: 'Baggy, sun hat or performance, or a mix of all three across one order.',
+          detail: 'Baggy cap, presentation cap or wide-brim sun hat, or a mix across one order.',
           confirmed: true,
         },
         {
@@ -115,9 +115,9 @@ export const customCricketCaps: CommercialPageContent = {
     { kind: 'process', heading: 'How it works' },
     {
       kind: 'quantities',
-      heading: 'How many caps do you need?',
+      heading: 'How many do you need?',
       intro:
-        'Runs start at twelve. A first order usually sits in the smaller brackets and grows once a club sees the result.',
+        'The minimum order is twelve. A first order usually sits in the smaller brackets and grows once a club sees the result.',
     },
   ],
   faqHeading: 'Common questions',
@@ -125,7 +125,7 @@ export const customCricketCaps: CommercialPageContent = {
     {
       question: 'What is the minimum order for custom cricket caps?',
       answer:
-        'Runs start at twelve caps. That covers a squad, a presentation run or a committee. Larger runs are straightforward, and we work in brackets of 12 to 24, 25 to 49, 50 to 100 and 100 or more.',
+        'The minimum order is twelve. That covers a squad, a presentation run or a committee. Larger runs are straightforward, and we work in brackets of 12 to 24, 25 to 49, 50 to 100 and 100 or more.',
       confirmed: true,
     },
     {
@@ -143,13 +143,13 @@ export const customCricketCaps: CommercialPageContent = {
     {
       question: 'How long does an order take?',
       answer:
-        'Selected projects can be delivered from two weeks following design approval. The real answer depends on the style, the quantity, the complexity of the artwork and where it is going. We confirm dates once we have seen the brief rather than quoting a number we cannot stand behind.',
+        'Selected projects are delivered from two weeks after design approval. The real answer depends on the style, the quantity, the complexity of the artwork and where it is going. We confirm dates once we have seen the brief rather than quoting a number we cannot stand behind.',
       confirmed: true,
     },
     {
       question: 'Can we order more than one style at once?',
       answer:
-        'Yes, and most clubs do. Baggy caps for presentation, sun hats for the field and performance caps for training is a common combination. Select more than one style in the brief form.',
+        'Yes, and most clubs do. Baggy caps for the first team, presentation caps for the awards evening and sun hats for the field is a common combination. Select more than one style in the brief form.',
       confirmed: true,
     },
     {
@@ -160,7 +160,7 @@ export const customCricketCaps: CommercialPageContent = {
     },
   ],
   enquiry: {
-    heading: 'Start your cap brief',
+    heading: 'Start your headwear brief',
     line: 'Tell us the style, the colours and the date. We will come back with options and a realistic timeline.',
   },
 };

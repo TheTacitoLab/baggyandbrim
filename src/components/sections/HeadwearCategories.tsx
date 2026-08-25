@@ -22,7 +22,6 @@ function HeadwearCategoryCard({ category, delay }: { category: HeadwearCategory;
       <InstantFrame imageId={category.imageId} sizes={CARD_SIZES} revealDirection="none" />
       <div className="mt-6">
         <h3 className="type-heading-s">{category.title}</h3>
-        <p className="type-label mt-2 text-on-surface-secondary">{category.positioning}</p>
       </div>
       <p className="type-body mt-4 text-on-surface">{category.body}</p>
       <div>

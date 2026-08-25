@@ -1,15 +1,13 @@
 import type { NavItem } from '@/types';
 
-// Primary navigation, five items, in this order (build spec Section 11.1).
-// On '/' the header renders `hash` with a smooth-scroll handler; elsewhere it
-// renders `href` — the full route for Journal and Enquire, the '/#hash' form for
-// the three homepage sections.
+// Primary navigation: the three products, then the Journal (build spec Section
+// 11.1, revised). Product-led so the range is legible in seconds; the enquiry
+// CTA sits separately as the header button.
 export const NAV_ITEMS: NavItem[] = [
-  { label: 'Headwear', hash: '#headwear', href: '/#headwear', isRoute: false },
-  { label: 'Occasions', hash: '#occasions', href: '/#occasions', isRoute: false },
-  { label: 'Process', hash: '#process', href: '/#process', isRoute: false },
-  { label: 'Journal', hash: '#journal', href: '/journal', isRoute: true },
-  { label: 'Enquire', hash: '#enquire', href: '/enquire', isRoute: true },
+  { label: 'Baggy Caps', href: '/baggy-cricket-caps' },
+  { label: 'Presentation Caps', href: '/cricket-presentation-caps' },
+  { label: 'Wide-Brim Sun Hats', href: '/cricket-sun-hats' },
+  { label: 'Journal', href: '/journal' },
 ];
 
 export interface SiteLink {
@@ -27,36 +25,30 @@ export const COMMERCIAL_LINKS: SiteLink[] = [
     description: 'The full range and where to start.',
   },
   {
-    label: 'Baggy cricket caps',
+    label: 'Baggy caps',
     href: '/baggy-cricket-caps',
     description: 'The traditional shape, made for your club.',
   },
   {
-    label: 'Cricket sun hats',
-    href: '/cricket-sun-hats',
-    description: 'Wide brims for full days in the field.',
-  },
-  {
-    label: 'Performance cricket caps',
-    href: '/performance-cricket-caps',
-    description: 'Lightweight caps for training and travel.',
-  },
-  {
     label: 'Presentation caps',
     href: '/cricket-presentation-caps',
-    description: 'Numbered, named and made to be kept.',
+    description: 'Structured caps for presentation, touring and club use.',
+  },
+  {
+    label: 'Wide-brim sun hats',
+    href: '/cricket-sun-hats',
+    description: 'Wide brims for full days in the field.',
   },
 ];
 
 export const EXPLORE_LINKS: SiteLink[] = [
   { label: 'Journal', href: '/journal' },
   { label: 'Process', href: '/#process' },
-  { label: 'Occasions', href: '/#occasions' },
-  { label: 'Start Your Cap Brief', href: '/enquire' },
+  { label: 'Start Your Headwear Brief', href: '/enquire' },
 ];
 
 export const HEADER_CTA = {
-  label: 'Start Your Cap Brief',
+  label: 'Start Your Headwear Brief',
   hash: '#enquire',
   href: '/enquire',
 } as const;

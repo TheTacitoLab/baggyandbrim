@@ -9,9 +9,9 @@ export const SITE = {
   namePlain: 'Baggy and Brim', // where an ampersand would break a URL, filename or field
   tagline: 'Old Heads. New Game.',
   domain: 'baggyandbrim.com',
-  description: 'Custom cricket headwear for clubs, organisations, events and brands.',
+  description: 'Custom cricket headwear for cricket clubs, schools and teams.',
   descriptionLong:
-    'Custom cricket headwear for clubs, organisations, events and brands. Baggy caps, sun hats and performance caps, made to order in your colours.',
+    'Custom cricket headwear for cricket clubs, schools and teams. Baggy caps, presentation caps and wide-brim sun hats, made in your colours and finished with your crest.',
 } as const;
 
 export interface ContactDetails {
@@ -35,13 +35,17 @@ export const COMPANY = {
 
 // The only permitted formulation of the timeline (Section 8 / Section 12 Process).
 export const DELIVERY_CLAIM =
-  'Selected projects can be delivered from two weeks following design approval.';
+  'Selected projects delivered from two weeks after design approval.';
+
+// The commercial detail line: minimum order plus the delivery claim. Shared so
+// the exact sentence never has to be duplicated across content files.
+export const ORDER_DETAIL_CLAIM = `Minimum order 12. ${DELIVERY_CLAIM}`;
 
 // Shared, reused across the homepage, the enquiry form and every commercial page.
 export const HAT_TYPES = [
-  'Baggy Cricket Caps',
-  'Cricket Sun Hats',
-  'Performance Cricket Caps',
+  'Baggy Caps',
+  'Presentation Caps',
+  'Wide-Brim Sun Hats',
   'Not Sure Yet',
 ] as const satisfies readonly HatType[];
 
@@ -96,7 +100,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     number: '04',
     title: 'Delivery',
     description:
-      'Caps arrive packed and ready to hand out, present or sell. Selected projects can be delivered from two weeks following design approval.',
+      'Headwear arrives packed and ready to hand out, present or sell. Selected projects delivered from two weeks after design approval.',
     compactDescription: 'Packed and ready to hand out, present or sell.',
   },
 ];

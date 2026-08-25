@@ -21,7 +21,7 @@ export function Wordmark({ as: Tag = 'span', size = 'md', href, className }: Wor
   const mark = (
     <Tag
       className={cn(
-        'font-display font-black leading-none tracking-[-0.02em]',
+        'font-display font-bold leading-none tracking-[-0.02em]',
         SIZE_CLASS[size],
         className,
       )}

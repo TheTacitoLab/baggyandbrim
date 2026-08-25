@@ -1,5 +1,5 @@
-import type { CustomisationOption, HeadwearCategory, Occasion } from '@/types';
-import { PROCESS_STEPS, VOLUME_BRACKETS } from '@/content/site';
+import type { CustomisationOption, HeadwearCategory } from '@/types';
+import { ORDER_DETAIL_CLAIM, PROCESS_STEPS } from '@/content/site';
 
 // All homepage copy (build spec Section 12). Every on-screen string lives here so
 // copy can be reviewed without reading JSX. British English throughout.
@@ -7,83 +7,39 @@ import { PROCESS_STEPS, VOLUME_BRACKETS } from '@/content/site';
 const categories: HeadwearCategory[] = [
   {
     slug: 'baggy',
-    title: 'Baggy Cricket Caps',
-    positioning: 'The ceremonial one.',
-    body: 'Traditional shapes, club colours, embroidered crests and construction built to be handed over. This is the cap that gets photographed and kept.',
+    title: 'Baggy Caps',
+    body: 'Custom baggy cricket caps using club colours, crests and bespoke detailing.',
     href: '/baggy-cricket-caps',
     linkLabel: 'View baggy caps',
     imageId: 'category-baggy',
   },
   {
+    slug: 'presentation',
+    title: 'Presentation Caps',
+    body: 'Premium structured caps for presentation, touring, travel and club use.',
+    href: '/cricket-presentation-caps',
+    linkLabel: 'View presentation caps',
+    imageId: 'category-presentation',
+  },
+  {
     slug: 'sun-hats',
-    title: 'Cricket Sun Hats',
-    positioning: 'The long day one.',
-    body: 'Wide brims for full sessions in the field. Club identity, sensible protection, and a shape that still looks like cricket.',
+    title: 'Wide-Brim Sun Hats',
+    body: 'Custom cricket sun hats made in club colours with embroidery and bespoke detailing.',
     href: '/cricket-sun-hats',
     linkLabel: 'View sun hats',
     imageId: 'category-sunhat',
   },
-  {
-    slug: 'performance',
-    title: 'Performance Cricket Caps',
-    positioning: 'The everyday one.',
-    body: 'Lightweight caps for training, travel, coaching and the walk from car park to nets. Built to be worn constantly.',
-    href: '/performance-cricket-caps',
-    linkLabel: 'View performance caps',
-    imageId: 'category-performance',
-  },
 ];
 
-const occasions: Occasion[] = [
-  {
-    name: 'Match',
-    number: '01',
-    description:
-      'Headwear made as part of a playing identity. Same colours, same crest, same look from first change to last over.',
-  },
-  {
-    name: 'Awards',
-    number: '02',
-    description:
-      'Caps that recognise something. Player of the season, a first team debut, the volunteer who has run the bar since 2009.',
-  },
-  {
-    name: 'Milestones',
-    number: '03',
-    description:
-      'Hundredth appearance. Fiftieth season. A tour, a title, a ground move. Caps that put a date on a memory.',
-  },
-  {
-    name: 'Honorary',
-    number: '04',
-    description:
-      'Life members, former captains, sponsors, groundstaff. The people who are part of the club without appearing on the team sheet.',
-  },
-  {
-    name: 'Presentation',
-    number: '05',
-    description:
-      'Caps designed to be given formally and kept permanently. Boxed, numbered, and handed over properly.',
-  },
-];
-
-// Revision 9.2: six confirmed decisions. Fabric, trim, presentation and
-// packaging fold into a single closing sentence rather than four ruled rows,
-// two of which were unconfirmed placeholders.
 const options: CustomisationOption[] = [
-  {
-    name: 'Silhouette and cap shape',
-    detail: 'Traditional baggy, wide-brim sun hat or performance fit.',
-    confirmed: true,
-  },
   {
     name: 'Club colours',
     detail: 'Matched to your existing kit, or set from scratch if you are starting again.',
     confirmed: true,
   },
   {
-    name: 'Embroidery',
-    detail: 'Crests, wordmarks, initials and lettering.',
+    name: 'Embroidered crests',
+    detail: 'Your crest or club logo, redrawn for embroidery where needed.',
     confirmed: true,
   },
   {
@@ -93,12 +49,17 @@ const options: CustomisationOption[] = [
   },
   {
     name: 'Initials and cap numbers',
-    detail: 'Individual names, initials or club cap numbers, applied per cap.',
+    detail: 'Individual names, initials or club cap numbers, applied per piece.',
+    confirmed: true,
+  },
+  {
+    name: 'Bespoke trims',
+    detail: 'Sweatbands, taping and finishing chosen to match your colours.',
     confirmed: true,
   },
   {
     name: 'Internal labels',
-    detail: 'Woven or printed labels inside the cap, including club name and year.',
+    detail: 'Woven or printed labels inside, including club name and year.',
     confirmed: true,
   },
 ];
@@ -108,56 +69,31 @@ export const HOMEPAGE = {
     eyebrow: 'Custom cricket headwear',
     displayLines: ['Old Heads.', 'New Game.'] as [string, string],
     // Retained for SEO fallbacks; the homepage H1 renders only the display lines.
-    headline: 'Custom cricket caps, sun hats and performance headwear',
+    headline: 'Custom cricket headwear for clubs, schools and teams',
     intro:
-      'Baggy caps, sun hats and performance caps, made to order for cricket clubs, schools and organisations.',
-    primaryCta: { label: 'Start Your Cap Brief', href: '#enquire' },
+      'Custom Baggy Caps, Presentation Caps and Wide-Brim Sun Hats for cricket clubs, schools and teams. Made in your colours and finished with your crest.',
+    primaryCta: { label: 'Start Your Headwear Brief', href: '#enquire' },
     secondaryCta: { label: 'Explore the Headwear', href: '#headwear' },
-    microLine:
-      'Runs from 12 caps. Selected projects delivered from two weeks after design approval.',
+    microLine: ORDER_DETAIL_CLAIM,
     imageId: 'hero-primary',
   },
-  // Revision 9.1: a held breath between the hero and the product. Mode A, ink.
-  brand: {
-    heading: 'We only make cricket headwear.',
-    body: 'Not kit. Not equipment. The caps clubs keep: handed over on debut, worn for fifteen seasons, brought out again at the anniversary dinner.',
-  },
   headwear: {
-    heading: 'Three caps. One club identity.',
-    intro:
-      'Different days need different headwear. We make all three properly, in your colours, with your crest.',
+    heading: 'The Headwear',
+    intro: 'Three products, made properly, in your colours, with your crest.',
     categories,
     cta: { label: 'See the full range', href: '/custom-cricket-caps' },
   },
-  occasions: {
-    heading: 'A cap is rarely just a cap.',
-    intro: 'Clubs commission headwear for five reasons. Only one of them is uniform.',
-    occasions,
-    cta: { label: 'See how presentation caps work', href: '/cricket-presentation-caps' },
-    imageId: 'occasions-honours',
-  },
-  product: {
-    heading: 'Specified properly, not picked from a catalogue.',
+  customisation: {
+    heading: 'Custom for Your Club',
     intro:
-      'Every brief is built from the same set of decisions. Choose as many or as few as you want. We will make the rest sensible.',
+      'Nothing here is pulled from stock. Every piece is made to order around your club, from the colours to the label inside.',
     options,
-    closingLine:
-      'Fabric, trim, packaging and presentation details are set once we know what the caps are for.',
-    imageIdPrimary: 'product-construction',
-    imageIdSecondary: 'product-stack',
+    closingLine: 'Your club. Your colours. Your headwear.',
   },
-  characters: {
-    headline: 'One keeps the scorebook. One loses the pencil.',
-    body: [
-      'Baggy has views on collars, walking before you are given, and the correct way to fold a jumper. Brim has views on tea, and not many others.',
-      'They have played together for twenty years and agreed on almost nothing. The caps are the one thing they both take seriously.',
-    ],
-    captions: [
-      'Baggy. Third change. Still convinced he should be opening.',
-      'Brim. Deep square leg. Ideally in the shade.',
-    ] as [string, string],
-    imageId: 'character-scene',
-    mobileImageId: 'character-scene-mobile',
+  // A held breath between the commercial sections. Mode A, ink.
+  brand: {
+    heading: 'We only make cricket headwear.',
+    body: 'Not kit. Not equipment. The caps and hats clubs keep: handed over on debut, worn for fifteen seasons, brought out again at the anniversary dinner.',
   },
   process: {
     heading: 'Four steps. We handle the middle two.',
@@ -165,17 +101,19 @@ export const HOMEPAGE = {
     note: 'Timings depend on design approval, product specification, quantity, production capacity and delivery location. We confirm dates once we have seen the brief.',
     closingLine:
       'One point of contact from brief to delivery. You are not managing three suppliers and a courier.',
-    cta: { label: 'Start Your Cap Brief', href: '#enquire' },
-    imageId: 'process-approval',
+    cta: { label: 'Start Your Headwear Brief', href: '#enquire' },
   },
-  volumes: {
-    label: 'Volumes',
-    heading: 'From a first eleven to a full club.',
-    intro: 'Runs start at twelve. Tell us the bracket and we will tell you what is realistic.',
-    brackets: VOLUME_BRACKETS,
-    note: 'Pricing is confirmed on enquiry, once the specification is clear.',
-    cta: { label: 'Start Your Cap Brief', href: '#enquire' },
-    imageId: 'volumes-team',
+  // Search-focused explanation of what we make and who we make it for (brief
+  // Section 10). Sits apart from the shorter editorial copy above it.
+  seoContent: {
+    heading: 'Custom Cricket Caps & Headwear for Clubs and Teams',
+    body: [
+      'Baggy & Brim is a specialist cricket headwear manufacturer. We design and make custom cricket caps, custom baggy cricket caps, cricket presentation caps and wide-brim cricket sun hats for clubs and teams that want their headwear made around their own identity rather than picked from a catalogue.',
+      'The range covers three products. Custom baggy cricket caps, embroidered with the club crest and built to be handed over and kept. Custom presentation caps, structured and finished for awards evenings, touring sides, officials and club use. And custom cricket sun hats with wide brims, made in club colours for long days in the field.',
+      'Every order is custom. Colour matching to existing kit, embroidered crests, club logos, initials and bespoke trims are all part of the brief, so cricket caps with a club logo or cricket hats with a club crest arrive looking like they belong to the club that ordered them.',
+      'We make cricket club caps and headwear for grassroots and village clubs, Premier League clubs, schools, universities, academies, touring sides, representative teams and cricket organisations across the UK. The minimum order is twelve, which suits a single team as well as a whole club, and every design is approved by you before anything is made.',
+      'If you are looking for custom cricket caps in the UK, embroidered cricket caps, custom presentation caps or bespoke cricket headwear for your club, school or team, start a headwear brief and we will come back with options, a specification and a realistic timeline.',
+    ],
   },
   journal: {
     label: 'Journal',
@@ -183,7 +121,7 @@ export const HOMEPAGE = {
     intro:
       'Notes on cap design, club traditions, embroidery, cap numbers, and how to get an order right first time.',
     emptyClosingLine:
-      'The first entries are being written. In the meantime, the quickest way to get an answer about a cap is to ask us directly.',
+      'The first entries are being written. In the meantime, the quickest way to get an answer about headwear is to ask us directly.',
     emptyCta: { label: 'Ask us instead', href: '#enquire' },
     populatedLink: { label: 'Read the Journal', href: '/journal' },
     clusters: [
@@ -193,8 +131,8 @@ export const HOMEPAGE = {
         line: 'Milestones, awards, honorary caps and how to plan them.',
       },
       {
-        name: 'Sun hats and performance',
-        line: 'Full days in the field and the caps worn every week.',
+        name: 'Sun hats',
+        line: 'Wide brims, full days in the field and club identity.',
       },
       {
         name: 'Ordering and design',
@@ -203,13 +141,13 @@ export const HOMEPAGE = {
     ],
   },
   enquiry: {
-    heading: 'Start Your Cap Brief',
+    heading: 'Start Your Headwear Brief',
     supporting: [
       'Five fields and a date. Tell us what you need and we will come back with options, a specification and a realistic timeline.',
       'If you are not sure what you want yet, say so. That is a normal way to start.',
     ],
     reassurance: [
-      'Runs from 12 caps',
+      'Minimum order 12',
       'Design visuals before anything is made',
       'One point of contact throughout',
     ],

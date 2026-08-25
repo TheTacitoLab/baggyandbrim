@@ -1,26 +1,20 @@
 // Content models and shared types. Build spec Section 25.
 
 export type HatType =
-  | 'Baggy Cricket Caps'
-  | 'Cricket Sun Hats'
-  | 'Performance Cricket Caps'
+  | 'Baggy Caps'
+  | 'Presentation Caps'
+  | 'Wide-Brim Sun Hats'
   | 'Not Sure Yet';
 
 export type VolumeBracketValue = '12–24' | '25–49' | '50–100' | '100+';
 
 export type Surface = 'paper' | 'ink' | 'cream' | 'green' | 'red';
 
-export type JournalCategory =
-  | 'Baggy Caps'
-  | 'Presentation'
-  | 'Sun Hats & Performance'
-  | 'Ordering & Design';
+export type JournalCategory = 'Baggy Caps' | 'Presentation' | 'Sun Hats' | 'Ordering & Design';
 
 export interface NavItem {
   label: string;
-  hash: string; // '#headwear'
-  href: string; // '/#headwear' or '/journal'
-  isRoute: boolean; // true for Journal and Enquire
+  href: string; // '/baggy-cricket-caps' or '/journal'
 }
 
 export interface ImageAsset {
@@ -40,19 +34,12 @@ export interface ImageAsset {
 }
 
 export interface HeadwearCategory {
-  slug: 'baggy' | 'sun-hats' | 'performance';
+  slug: 'baggy' | 'presentation' | 'sun-hats';
   title: string;
-  positioning: string;
   body: string;
   href: string;
   linkLabel: string;
   imageId: string;
-}
-
-export interface Occasion {
-  name: 'Match' | 'Awards' | 'Milestones' | 'Honorary' | 'Presentation';
-  number: string; // '01'
-  description: string;
 }
 
 export interface ProcessStep {

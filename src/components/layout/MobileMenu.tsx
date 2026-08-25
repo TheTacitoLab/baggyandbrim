@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
-import { COMMERCIAL_LINKS, HEADER_CTA, NAV_ITEMS } from '@/content/navigation';
+import { HEADER_CTA, NAV_ITEMS } from '@/content/navigation';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useScrollLock } from '@/hooks/useScrollLock';
 import { scrollToHash } from './SiteHeader';
@@ -107,28 +107,9 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="shell flex flex-1 flex-col justify-between overflow-y-auto pb-8 pt-6">
             <nav aria-label="Primary" className="flex flex-col">
               <ul className="flex flex-col gap-5">
-                {NAV_ITEMS.map((item) => {
-                  const href = isHome && !item.isRoute ? item.hash : item.href;
-                  return (
-                    <li key={item.label}>
-                      <Link
-                        href={href}
-                        onClick={item.isRoute ? close : (e) => onAnchor(e, item.hash)}
-                        className="type-heading-m"
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-
-              <div className="my-8 h-px w-full bg-[color:var(--colour-rule-inverse)]" />
-
-              <ul className="flex flex-col gap-3">
-                {COMMERCIAL_LINKS.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} onClick={close} className="type-body">
+                {NAV_ITEMS.map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} onClick={close} className="type-heading-m">
                       {item.label}
                     </Link>
                   </li>

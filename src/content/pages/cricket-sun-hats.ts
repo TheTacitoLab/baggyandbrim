@@ -8,13 +8,13 @@ export const cricketSunHats: CommercialPageContent = {
   slug: 'cricket-sun-hats',
   intent: 'Squad and junior-section buyers of custom club sun hats.',
   accent: 'green',
-  h1: 'Custom Cricket Sun Hats for Clubs',
+  h1: 'Custom Wide-Brim Cricket Sun Hats',
   heroEyebrow: 'Custom club sun hats',
   heroIntro:
     'Wide-brim cricket hats made in your club colours with your crest on the front. Ordered for squads, junior sections and anyone spending a full day in the field.',
   heroImageId: 'lp-hero-sunhat',
-  primaryCta: { label: 'Start Your Cap Brief', href: '/enquire' },
-  secondaryCta: { label: 'See performance caps', href: '/performance-cricket-caps' },
+  primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
+  secondaryCta: { label: 'See presentation caps', href: '/cricket-presentation-caps' },
   blocks: [
     {
       kind: 'prose',
@@ -67,7 +67,7 @@ export const cricketSunHats: CommercialPageContent = {
       kind: 'quantities',
       heading: 'Quantities',
       intro:
-        'Runs start at twelve. A junior section usually lands in the middle brackets, and a whole-club order often reaches the larger ones.',
+        'The minimum order is twelve. A junior section usually lands in the middle brackets, and a whole-club order often reaches the larger ones.',
     },
   ],
   faqHeading: 'Common questions',
@@ -100,18 +100,18 @@ export const cricketSunHats: CommercialPageContent = {
     {
       question: 'How many do we need to order?',
       answer:
-        'Runs start at twelve. A junior section usually lands in the 25 to 49 bracket, and a whole-club order often reaches 50 to 100.',
+        'The minimum order is twelve. A junior section usually lands in the 25 to 49 bracket, and a whole-club order often reaches 50 to 100.',
       confirmed: true,
     },
     {
       question: 'How long do they take?',
       answer:
-        'Selected projects can be delivered from two weeks following design approval. If you are ordering for the start of a season, start the brief before the season plan is finalised rather than after.',
+        'Selected projects are delivered from two weeks after design approval. If you are ordering for the start of a season, start the brief before the season plan is finalised.',
       confirmed: true,
     },
   ],
   enquiry: {
-    heading: 'Start your cap brief',
+    heading: 'Start your headwear brief',
     line: 'Tell us the squad, the age range and your colours. We will set the sizing and show you the hat before it is made.',
   },
 };

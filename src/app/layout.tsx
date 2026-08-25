@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import { bricolage } from '@/lib/fonts';
+import { archivo } from '@/lib/fonts';
 import { env } from '@/lib/env';
 import { SITE } from '@/content/site';
 import { PAGE_SEO } from '@/content/seo';
@@ -46,7 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en-GB"
-      className={`${bricolage.variable} font-display-fallback`}
+      className={archivo.variable}
       // Next 16 no longer overrides scroll-behavior on navigation by default;
       // this opts back into instant scroll on route change while keeping smooth
       // scrolling for in-page anchors.
@@ -67,7 +67,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <SiteFooter />
-        <StickyEnquiryCTA href="/enquire" label="Start Your Cap Brief" />
+        <StickyEnquiryCTA href="/enquire" label="Start Your Headwear Brief" />
         <RevealObserver />
         <Analytics gaId={env.gaId} consentRequired={env.consentBannerEnabled} />
       </body>

@@ -2,24 +2,20 @@ import type { Metadata } from 'next';
 import { buildMetadata } from '@/content/seo';
 import { HOMEPAGE } from '@/content/homepage';
 import { EditorialHero } from '@/components/sections/EditorialHero';
-import { BrandStatement } from '@/components/sections/BrandStatement';
 import { HeadwearCategories } from '@/components/sections/HeadwearCategories';
-import { OccasionGrid } from '@/components/sections/OccasionGrid';
-import { ProductDetail } from '@/components/sections/ProductDetail';
-import { CharacterFeature } from '@/components/sections/CharacterFeature';
+import { Customisation } from '@/components/sections/Customisation';
+import { BrandStatement } from '@/components/sections/BrandStatement';
 import { ProcessSteps } from '@/components/sections/ProcessSteps';
-import { VolumeSelector } from '@/components/sections/VolumeSelector';
-import { JournalPreview } from '@/components/sections/JournalPreview';
+import { SeoContent } from '@/components/sections/SeoContent';
 import { EnquirySection } from '@/components/sections/EnquirySection';
 
 export const metadata: Metadata = buildMetadata({ path: '/' });
 
-// Surface ladder, top to bottom (Revision 1.3):
-// paper, ink, paper, green, cream, paper, green, cream, paper, ink, ink.
-// Narrative order (Revision 9): what we make → who it is for → what it costs in
-// effort → how many → who we are, with the character moment moved below volumes.
+// Surface ladder, top to bottom: paper, paper, cream, ink, paper, cream, ink, ink.
+// Narrative order: what we make → how it is customised → who we are → how it
+// works → search-focused explanation → the brief.
 export default function HomePage() {
-  const { hero, process, volumes } = HOMEPAGE;
+  const { hero, process } = HOMEPAGE;
   return (
     <>
       <EditorialHero
@@ -33,30 +29,18 @@ export default function HomePage() {
         imageId={hero.imageId}
         height="full"
       />
-      <BrandStatement />
       <HeadwearCategories />
-      <OccasionGrid />
-      <ProductDetail />
+      <Customisation />
+      <BrandStatement />
       <ProcessSteps
         heading={process.heading}
         steps={process.steps}
         variant="full"
         note={process.note}
         closingLine={process.closingLine}
-        imageId={process.imageId}
         cta={process.cta}
       />
-      <VolumeSelector
-        label={volumes.label}
-        heading={volumes.heading}
-        intro={volumes.intro}
-        brackets={volumes.brackets}
-        note={volumes.note}
-        cta={volumes.cta}
-        imageId={volumes.imageId}
-      />
-      <CharacterFeature />
-      <JournalPreview />
+      <SeoContent />
       <EnquirySection />
     </>
   );

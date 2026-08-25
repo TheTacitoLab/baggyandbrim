@@ -32,7 +32,7 @@ export function EnquiryCtaBand({ heading, line, section, labelledById = 'enquiry
             params={{ section }}
             className="btn btn-primary"
           >
-            Start Your Cap Brief
+            Start Your Headwear Brief
           </CtaLink>
         </div>
       </div>

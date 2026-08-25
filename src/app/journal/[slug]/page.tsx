@@ -128,7 +128,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </article>
 
       <EnquiryCtaBand
-        heading="Start Your Cap Brief"
+        heading="Start Your Headwear Brief"
         line="If this raised a question about a cap, the quickest answer comes from a brief."
         section="journal-article"
       />

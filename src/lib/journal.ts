@@ -10,12 +10,7 @@ import { readingTime as computeReadingTime, slugify } from '@/lib/utils';
 
 const JOURNAL_DIR = path.join(process.cwd(), 'content', 'journal');
 
-const CATEGORIES = [
-  'Baggy Caps',
-  'Presentation',
-  'Sun Hats & Performance',
-  'Ordering & Design',
-] as const;
+const CATEGORIES = ['Baggy Caps', 'Presentation', 'Sun Hats', 'Ordering & Design'] as const;
 
 const DATE = /^\d{4}-\d{2}-\d{2}$/;
 

@@ -2,7 +2,7 @@
 
 A premium editorial lead-generation website for a custom cricket headwear specialist.
 No ecommerce; the single commercial objective is qualified enquiries submitted through
-the cap brief form.
+the headwear brief form.
 
 Built to the Baggy & Brim Website Build Specification (v1.0). This README covers setup,
 environment variables, content authoring, the image manifest, the design tokens and
@@ -69,7 +69,7 @@ src/app/                   # routes, metadata files, api/enquiry route, sitemap,
 src/components/            # layout, sections, ui, media, journal, form, seo, analytics
 src/content/               # ALL on-screen copy, typed, plus the image manifest and SEO
 src/lib/                   # env, fonts, journal, schema, analytics, utils, validation, og
-src/hooks/                 # useReducedMotion, useActiveSection, useScrollLock
+src/hooks/                 # useReducedMotion, useScrollLock
 src/types/                 # content models and shared types
 ```
 
@@ -82,7 +82,7 @@ from a typed content file, so copy can be reviewed without reading JSX.
 
 - Homepage copy: `src/content/homepage.ts`.
 - Commercial pages: `src/content/pages/*.ts`. Each exports a `CommercialPageContent`
-  object whose `blocks` array drives the page in its own H2 order. All five pages share
+  object whose `blocks` array drives the page in its own H2 order. All four pages share
   one template (`src/components/templates/CommercialPage.tsx`) and every rendering
   component; only the copy differs. `npm run check:dupes` enforces that no body
   paragraph appears on two pages.
@@ -92,12 +92,12 @@ from a typed content file, so copy can be reviewed without reading JSX.
 
 Drop a file at `content/journal/{slug}.mdx`. Frontmatter is validated with Zod at build
 time; a malformed article fails the build with the file and field named. Adding one file
-switches the homepage preview and `/journal` from their empty states to the populated
-states with no code change; removing it reverts them.
+switches `/journal` from its empty state to the populated state with no code change;
+removing it reverts it.
 
 Required frontmatter: `title`, `slug` (must match the filename), `excerpt` (120–200
 chars), `publishedDate` (`YYYY-MM-DD`), `author`, `category` (one of `Baggy Caps`,
-`Presentation`, `Sun Hats & Performance`, `Ordering & Design`), `primaryKeyword`,
+`Presentation`, `Sun Hats`, `Ordering & Design`), `primaryKeyword`,
 `featuredImage`, `featuredImageAlt`, `draft` (explicit boolean), `relatedCommercialPage`.
 Optional: `updatedDate`, `secondaryKeywords`, `readingTime`, `metaTitle`,
 `metaDescription`, `canonicalUrl`.
@@ -167,8 +167,6 @@ are automatically `noindex`. Submit the sitemap in Search Console after launch.
 - The spec targets Next.js 15+; this build uses the current stable **Next.js 16**
   (Turbopack default, async `params`/`searchParams`) and **Zod 4**.
 - `next/image` uses `preload` (Next 16 replaced the deprecated `priority` prop).
-- `VolumeSelector` renders the display version; the enquiry form uses its own accessible
-  `RadioGroup` for the input version.
 - `playwright-core` is an optional dev dependency used only for local visual QA
   screenshots; it is not part of the runtime.
 
@@ -176,12 +174,12 @@ are automatically `noindex`. Submit the sitemap in Search Console after launch.
 
 Tracked in Section 37 of the build spec. The blocking ones:
 
-- Recoleta Black licence and font files (a documented Georgia fallback is in place, see
-  `src/lib/fonts.ts`).
+- Founders Grotesk licence and font files, including the X-Condensed family (a
+  documented Archivo stand-in is in place, see `src/lib/fonts.ts`).
 - Contact email, social handles, registered company details.
 - Privacy policy and terms content (the pages ship honest, clearly-marked placeholders).
 - `WEB3FORMS_ACCESS_KEY` and a live test submission.
-- Final photography (zero image placeholders) and the character illustrations.
+- Final photography (zero image placeholders).
 - Confirmation of the four production specifications and every FAQ still marked
   `confirmed: false`.
 - Consent-banner requirement (the banner is built and disabled by flag).

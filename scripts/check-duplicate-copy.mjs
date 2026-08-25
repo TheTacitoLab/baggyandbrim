@@ -12,7 +12,6 @@ const FILES = [
   'src/content/pages/custom-cricket-caps.ts',
   'src/content/pages/baggy-cricket-caps.ts',
   'src/content/pages/cricket-sun-hats.ts',
-  'src/content/pages/performance-cricket-caps.ts',
   'src/content/pages/cricket-presentation-caps.ts',
 ];
 

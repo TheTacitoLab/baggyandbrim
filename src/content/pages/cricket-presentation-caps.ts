@@ -1,9 +1,8 @@
 import type { CommercialPageContent } from '@/types';
 
 // /cricket-presentation-caps (build spec Section 13.6). Low volume, highest value
-// and highest intent on the site. Tone note: humour is off this page entirely and
-// no character illustration appears. Accent: red. No body paragraph here appears
-// on any other page.
+// and highest intent on the site. Tone note: humour is off this page entirely.
+// Accent: red. No body paragraph here appears on any other page.
 
 export const cricketPresentationCaps: CommercialPageContent = {
   slug: 'cricket-presentation-caps',
@@ -14,7 +13,7 @@ export const cricketPresentationCaps: CommercialPageContent = {
   heroIntro:
     'Caps made to be handed over and kept. Numbered, named and boxed, for debuts, milestones, life memberships and club anniversaries.',
   heroImageId: 'lp-hero-presentation',
-  primaryCta: { label: 'Start Your Cap Brief', href: '/enquire' },
+  primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See baggy caps', href: '/baggy-cricket-caps' },
   blocks: [
     {
@@ -74,7 +73,7 @@ export const cricketPresentationCaps: CommercialPageContent = {
       heading: 'Planning around a fixed date',
       body: [
         'Work backwards. Set the date of the presentation, allow time for delivery, allow time for production, and leave a clear week for design approval, because that is the step most likely to slip while a committee makes up its mind.',
-        'Selected projects can be delivered from two weeks following design approval, but a presentation run with individual names and numbers benefits from more room than that. If your date is close, say so in the brief. We would rather tell you honestly than take the order and hope.',
+        'Selected projects are delivered from two weeks after design approval, but a presentation run with individual names and numbers benefits from more room than that. If your date is close, say so in the brief. We would rather tell you honestly than take the order and hope.',
       ],
     },
     { kind: 'process', heading: 'How it works' },
@@ -85,7 +84,7 @@ export const cricketPresentationCaps: CommercialPageContent = {
       question: 'Can we order just a few caps?',
       // TODO-15: whether orders below twelve are possible for single awards.
       answer:
-        'Runs start at twelve, which covers most presentation evenings. If you need fewer than twelve for a single award, tell us in the brief and we will tell you honestly whether it is workable.',
+        'The minimum order is twelve, which covers most presentation evenings. If you need fewer than twelve for a single award, tell us in the brief and we will tell you honestly whether it is workable.',
       confirmed: false,
     },
     {
@@ -120,7 +119,7 @@ export const cricketPresentationCaps: CommercialPageContent = {
     },
   ],
   enquiry: {
-    heading: 'Start your cap brief',
+    heading: 'Start your headwear brief',
     line: 'Tell us the occasion, the names and the date, and we will handle the detail with care.',
   },
 };

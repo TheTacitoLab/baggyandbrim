@@ -16,8 +16,16 @@
   --color-grey: #63615b;
   --color-grey-muted: #77756f;
 
-  --font-display: var(--font-recoleta), Georgia, 'Times New Roman', serif;
-  --font-sans: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  /* One typeface system: Founders Grotesk (brief Section 4). The licensed
+     families lead each stack; Archivo (variable, with a width axis) stands in
+     until the files are supplied — see src/lib/fonts.ts. */
+  --font-display: var(--font-founders, 'Founders Grotesk'), var(--font-archivo), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-sans: var(--font-founders, 'Founders Grotesk'), var(--font-archivo), ui-sans-serif,
+    system-ui, sans-serif;
+  --font-condensed: var(--font-founders-condensed, 'Founders Grotesk X-Condensed'),
+    var(--font-founders, 'Founders Grotesk'), var(--font-archivo), ui-sans-serif, system-ui,
+    sans-serif;
 
   --breakpoint-xs: 24rem;
 }
@@ -62,7 +70,7 @@
   --type-heading-s: clamp(1.125rem, 1.6vw, 1.375rem);
   --type-body-l: clamp(1.0625rem, 1.4vw, 1.3125rem);
   --type-body-s: 0.875rem;
-  --type-label: 0.75rem;
+  --type-label: 0.8125rem;
   --type-number: clamp(1rem, 1.4vw, 1.125rem);
 
   /* Motion tokens (Section 26.1). */
@@ -191,7 +199,7 @@
   h3,
   h4 {
     text-wrap: balance;
-    font-weight: 800;
+    font-weight: 700;
   }
 
   p {
@@ -241,38 +249,40 @@
     }
   }
 
-  /* --- Type scale (Section 7.3) ------------------------------------------ */
+  /* --- Type scale (Section 7.3) ------------------------------------------
+     Main titles: Founders Grotesk Bold, tight tracking. Secondary titles:
+     Medium/Semibold. Body: Regular. Accents: X-Condensed uppercase. */
   .type-display-xl {
     font-family: var(--font-display);
-    font-weight: 900;
+    font-weight: 700;
     font-size: var(--type-display-xl);
     line-height: 0.92;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.025em;
   }
   .type-display-l {
     font-family: var(--font-display);
-    font-weight: 900;
+    font-weight: 700;
     font-size: var(--type-display-l);
     line-height: 0.96;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
   }
   .type-display-m {
     font-family: var(--font-display);
-    font-weight: 900;
+    font-weight: 700;
     font-size: var(--type-display-m);
     line-height: 1.05;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
   }
   .type-heading-l {
     font-family: var(--font-sans);
-    font-weight: 800;
+    font-weight: 700;
     font-size: var(--type-heading-l);
     line-height: 1.05;
     letter-spacing: -0.02em;
   }
   .type-heading-m {
     font-family: var(--font-sans);
-    font-weight: 800;
+    font-weight: 600;
     font-size: var(--type-heading-m);
     line-height: 1.15;
     letter-spacing: -0.015em;
@@ -302,12 +312,17 @@
     font-size: var(--type-body-s);
     line-height: 1.5;
   }
+  /* The X-Condensed accent: eyebrows, section labels, product categories and
+     small editorial details, always uppercase. Condensed caps take far less
+     tracking than a normal-width grotesque; font-stretch keeps the Archivo
+     stand-in condensed until the licensed X-Condensed family is supplied. */
   .type-label {
-    font-family: var(--font-sans);
+    font-family: var(--font-condensed);
+    font-stretch: 80%;
     font-weight: 500;
     font-size: var(--type-label);
     line-height: 1.2;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
   .type-number {
@@ -323,16 +338,6 @@
     .type-body {
       font-size: 1.0625rem;
     }
-  }
-
-  /* Optical adjustment while the Recoleta licence is unavailable (Section 7.2).
-     Georgia runs smaller and lighter than Recoleta Black. This single utility
-     lives on <html> and is removed in one commit when Recoleta is supplied. */
-  .font-display-fallback .type-display-xl,
-  .font-display-fallback .type-display-l,
-  .font-display-fallback .type-display-m {
-    font-weight: 700;
-    letter-spacing: -0.02em;
   }
 
   /* --- Buttons and links (Revision 7) -----------------------------------
@@ -534,7 +539,6 @@
     font-size: 13px;
     line-height: 1.3;
     letter-spacing: 0.01em;
-    font-style: italic;
     color: #6c6a62;
   }
   @media (min-width: 768px) {

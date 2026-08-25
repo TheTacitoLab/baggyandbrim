@@ -19,7 +19,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
         }}
       >
         <title>Something went wrong | Baggy &amp; Brim</title>
-        <h1 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.02em' }}>Something slipped.</h1>
+        <h1 style={{ fontSize: '2rem', fontWeight: 700, letterSpacing: '-0.02em' }}>Something slipped.</h1>
         <p style={{ marginTop: '1rem', maxWidth: '40ch', color: 'rgba(247,246,241,0.72)' }}>
           That did not load as it should. Please try again.
         </p>

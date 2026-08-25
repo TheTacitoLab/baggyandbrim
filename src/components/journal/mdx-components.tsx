@@ -102,7 +102,7 @@ function InlineCTA({
       <div className="flex flex-col gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="type-body-l max-w-[44ch]">{line}</p>
         <Link href="/enquire" className="btn btn-primary shrink-0">
-          Start Your Cap Brief
+          Start Your Headwear Brief
         </Link>
       </div>
       <ScorebookRule animate={false} />

@@ -17,14 +17,14 @@ const INTRO = [
 ];
 
 export default function EnquirePage() {
-  const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Start Your Cap Brief' }];
+  const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Start Your Headwear Brief' }];
 
   return (
     <section data-surface="ink" aria-labelledby="enquire-heading" className="bg-ink text-paper">
       <JsonLd
         data={[
           breadcrumbSchema(breadcrumbs),
-          contactPageSchema('/enquire', 'Start Your Cap Brief'),
+          contactPageSchema('/enquire', 'Start Your Headwear Brief'),
         ]}
       />
       <div className="shell pt-[calc(var(--header-height)+1.5rem)]">
@@ -35,7 +35,7 @@ export default function EnquirePage() {
         <div className="lg:col-span-5">
           <p className="type-label text-on-surface-secondary">Custom cricket headwear</p>
           <h1 id="enquire-heading" className="type-heading-l mt-5">
-            Start Your Cap Brief
+            Start Your Headwear Brief
           </h1>
           <div className="mt-6 flex flex-col gap-4">
             {INTRO.map((paragraph, index) => (

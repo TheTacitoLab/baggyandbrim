@@ -5,14 +5,14 @@ import { CONTACT } from '@/content/site';
 
 export const ENQUIRY_FORM = {
   requiredLegend: 'Required fields are marked with an asterisk',
-  submitIdle: 'Send My Cap Brief',
+  submitIdle: 'Send My Headwear Brief',
   submitBusy: 'Sending',
   fields: {
     fullName: 'Full name',
     email: 'Email address',
     phone: 'Phone number',
     organisation: 'Club or organisation',
-    hatTypes: 'Hat type',
+    hatTypes: 'Headwear type',
     volume: 'Volume required',
     targetDate: 'Target delivery date',
     message: 'Anything else',
@@ -30,7 +30,7 @@ export const ENQUIRY_FORM = {
         : 'That is a few briefs in quick succession. Give it ten minutes and try again.',
   },
   success: {
-    heading: 'Brief received. The old heads are on it.',
+    heading: 'Brief received. We are on it.',
     body: 'We will review what you have sent and come back to you to confirm the detail. Nothing is produced until you have seen and approved a design.',
     urgentLine:
       'If your date is tight, reply to us with the deadline and we will prioritise it.',

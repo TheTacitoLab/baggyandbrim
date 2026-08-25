@@ -13,7 +13,7 @@ export const baggyCricketCaps: CommercialPageContent = {
   heroIntro:
     'Traditional cricket caps made in your club colours, with your crest embroidered on the front and your cap numbers inside. The cap that gets handed over and kept.',
   heroImageId: 'lp-hero-baggy',
-  primaryCta: { label: 'Start Your Cap Brief', href: '/enquire' },
+  primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See how presentation caps work', href: '/cricket-presentation-caps' },
   blocks: [
     {
@@ -67,7 +67,7 @@ export const baggyCricketCaps: CommercialPageContent = {
       kind: 'quantities',
       heading: 'Quantities',
       intro:
-        'Runs start at twelve, which covers a first team and a committee. Clubs that number caps often reorder in small batches each season as new players are capped.',
+        'The minimum order is twelve, which covers a first team and a committee. Clubs that number caps often reorder in small batches each season as new players are capped.',
     },
   ],
   faqHeading: 'Common questions',
@@ -112,7 +112,7 @@ export const baggyCricketCaps: CommercialPageContent = {
     },
   ],
   enquiry: {
-    heading: 'Start your cap brief',
+    heading: 'Start your headwear brief',
     line: 'Send us the crest, the colours and the numbers. We will show you the cap on a visual before it is made.',
   },
 };

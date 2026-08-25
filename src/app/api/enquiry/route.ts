@@ -72,15 +72,15 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const subject = `New cap brief: ${data.organisation || data.fullName}, ${data.volume} caps, ${data.hatTypes.join(', ')}`;
+  const subject = `New headwear brief: ${data.organisation || data.fullName}, ${data.volume}, ${data.hatTypes.join(', ')}`;
 
   const lines = [
     `Full name: ${data.fullName}`,
     `Email: ${data.email}`,
     `Phone: ${data.phone}`,
     `Club or organisation: ${data.organisation || 'Not given'}`,
-    `Hat type: ${data.hatTypes.join(', ')}`,
-    `Volume required: ${data.volume} caps`,
+    `Headwear type: ${data.hatTypes.join(', ')}`,
+    `Volume required: ${data.volume}`,
     `Target delivery date: ${formatDateLong(data.targetDate)}`,
     `Anything else: ${data.message || 'Not given'}`,
   ];

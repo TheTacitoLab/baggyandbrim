@@ -14,37 +14,31 @@ export const PAGE_SEO = {
   '/': {
     title: 'Custom Cricket Headwear for Clubs',
     description:
-      'Custom baggy caps, cricket sun hats and performance caps for clubs, schools, organisations and brands. Made to order in your colours. Runs from 12.',
+      'Custom baggy caps, presentation caps and wide-brim sun hats for cricket clubs, schools and teams. Made in your colours with your crest. Minimum order 12.',
     intent: 'Brand and category discovery for custom cricket headwear buyers.',
   },
   '/custom-cricket-caps': {
     title: 'Custom Cricket Caps for Clubs',
     description:
-      'Custom cricket caps made to order in your club colours with embroidered crests. Baggy caps, sun hats and performance caps. Runs from 12 caps.',
+      'Custom cricket caps made to order in your club colours with embroidered crests. Baggy caps, presentation caps and wide-brim sun hats. Minimum order 12.',
     intent: 'Broad commercial research into commissioning custom cricket caps.',
   },
   '/baggy-cricket-caps': {
     title: 'Custom Baggy Cricket Caps',
     description:
-      'Traditional baggy cricket caps made for your club. Club colours, embroidered crests, cap numbers and names inside. Presentation and match caps from 12.',
+      'Traditional baggy cricket caps made for your club. Club colours, embroidered crests, cap numbers and names inside. Minimum order 12.',
     intent: 'Club buyers commissioning traditional baggy caps.',
   },
   '/cricket-sun-hats': {
-    title: 'Custom Cricket Sun Hats for Clubs',
+    title: 'Custom Wide-Brim Cricket Sun Hats',
     description:
-      'Wide-brim cricket sun hats made in your club colours with your crest embroidered. Squad and junior section runs from 12 hats.',
+      'Wide-brim cricket sun hats made in your club colours with your crest embroidered. Squad, junior section and whole-club orders. Minimum order 12.',
     intent: 'Squad and junior-section buyers of custom club sun hats.',
-  },
-  '/performance-cricket-caps': {
-    title: 'Custom Performance Cricket Caps',
-    description:
-      'Lightweight performance cricket caps for training, travel and coaching. Custom club colours and embroidered crests. Whole-club runs available.',
-    intent: 'Buyers of everyday training and travel cricket caps.',
   },
   '/cricket-presentation-caps': {
     title: 'Cricket Presentation Caps',
     description:
-      'Presentation caps for debuts, milestones, life memberships and club anniversaries. Numbered, named and made to be kept. Runs from 12 caps.',
+      'Presentation caps for debuts, milestones, life memberships and club anniversaries. Numbered, named and made to be kept. Minimum order 12.',
     intent: 'Occasion-driven buyers organising a presentation or milestone.',
   },
   '/journal': {
@@ -54,9 +48,9 @@ export const PAGE_SEO = {
     intent: 'Editorial hub and internal-linking engine.',
   },
   '/enquire': {
-    title: 'Start Your Cap Brief',
+    title: 'Start Your Headwear Brief',
     description:
-      'Tell us what your club needs and we will come back with options, a specification and a realistic timeline. Custom cricket headwear from 12 caps.',
+      'Tell us what your club needs and we will come back with options, a specification and a realistic timeline. Custom cricket headwear from a minimum of 12.',
     intent: 'Direct conversion destination for the enquiry form.',
   },
   '/privacy': {
