@@ -102,7 +102,7 @@ export function EditorialHero({
               <h1 id="hero-heading" className="mt-4">
                 <Reveal as="span" className="block">
                   <span className="type-display-l block whitespace-nowrap">{lines[0]}</span>
-                </Reveal>
+                </Reveal>{' '}
                 <Reveal as="span" delay={100} className="block">
                   <span className="type-display-l block whitespace-nowrap">{lines[1]}</span>
                 </Reveal>

@@ -111,19 +111,15 @@ export const HOMEPAGE = {
       'Baggy & Brim is a specialist cricket headwear manufacturer. We design and make custom cricket caps, custom baggy cricket caps, cricket presentation caps and wide-brim cricket sun hats for clubs and teams that want their headwear made around their own identity rather than picked from a catalogue.',
       'The range covers three products. Custom baggy cricket caps, embroidered with the club crest and built to be handed over and kept. Custom presentation caps, structured and finished for awards evenings, touring sides, officials and club use. And custom cricket sun hats with wide brims, made in club colours for long days in the field.',
       'Every order is custom. Colour matching to existing kit, embroidered crests, club logos, initials and bespoke trims are all part of the brief, so cricket caps with a club logo or cricket hats with a club crest arrive looking like they belong to the club that ordered them.',
-      'We make cricket club caps and headwear for grassroots and village clubs, Premier League clubs, schools, universities, academies, touring sides, representative teams and cricket organisations across the UK. The minimum order is twelve, which suits a single team as well as a whole club, and every design is approved by you before anything is made.',
-      'If you are looking for custom cricket caps in the UK, embroidered cricket caps, custom presentation caps or bespoke cricket headwear for your club, school or team, start a headwear brief and we will come back with options, a specification and a realistic timeline.',
+      'We make cricket club caps and custom cricket headwear for grassroots and village clubs, Premier League clubs, schools, universities, academies, touring sides, representative teams and cricket organisations across the UK. The minimum order is twelve, which suits a single team as well as a whole club.',
+      'If you are looking for custom cricket caps in the UK, embroidered cricket caps, custom presentation caps or bespoke cricket headwear for your club, school or team, start a headwear brief below.',
     ],
   },
+  // Consumed by the /journal empty state only; the homepage carries no journal
+  // section.
   journal: {
-    label: 'Journal',
-    heading: 'The Journal',
-    intro:
-      'Notes on cap design, club traditions, embroidery, cap numbers, and how to get an order right first time.',
     emptyClosingLine:
       'The first entries are being written. In the meantime, the quickest way to get an answer about headwear is to ask us directly.',
-    emptyCta: { label: 'Ask us instead', href: '#enquire' },
-    populatedLink: { label: 'Read the Journal', href: '/journal' },
     clusters: [
       { name: 'Baggy caps', line: 'Traditional shapes, cap numbers and the history clubs keep.' },
       {

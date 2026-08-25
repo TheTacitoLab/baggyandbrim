@@ -11,6 +11,7 @@ interface JournalCardProps {
   variant?: 'featured' | 'grid' | 'compact';
   showExcerpt?: boolean; // false on the homepage
   location?: string; // analytics
+  headingLevel?: 'h2' | 'h3'; // h2 on /journal, where cards sit directly under the H1
 }
 
 // Journal cards are 3:2 and always framed (Revision 5.2, 8.5).
@@ -35,9 +36,9 @@ function CardImage({ article }: { article: JournalArticle }) {
           <FramePlaceholder subject={asset.subject} />
         )}
       </div>
-      <p className={cn('instant-frame__chin', !exists ? undefined : 'instant-frame__chin--empty')}>
-        {exists ? '' : `${asset.subject} 3:2`}
-      </p>
+      {/* No caption system on cards; shot notes stay in the manifest and are
+          never rendered (brief Section 5). */}
+      <p className="instant-frame__chin instant-frame__chin--empty" />
     </div>
   );
 }
@@ -47,13 +48,14 @@ export function JournalCard({
   variant = 'grid',
   showExcerpt = true,
   location = 'journal',
+  headingLevel: Heading = 'h3',
 }: JournalCardProps) {
   const headingClass = variant === 'featured' ? 'type-heading-l' : 'type-heading-s';
   return (
     <article className="group flex flex-col">
       <CardImage article={article} />
       <p className="type-label mt-5 text-on-surface-secondary">{article.category}</p>
-      <h3 className={cn('mt-3', headingClass)}>
+      <Heading className={cn('mt-3', headingClass)}>
         <CtaLink
           href={`/journal/${article.slug}`}
           event="journal_article_click"
@@ -61,7 +63,7 @@ export function JournalCard({
         >
           {article.title}
         </CtaLink>
-      </h3>
+      </Heading>
       {showExcerpt && (
         <p className="type-body mt-3 max-w-[42ch] text-on-surface-secondary">{article.excerpt}</p>
       )}

@@ -59,10 +59,10 @@ export default function JournalIndexPage() {
               <>
                 {featured && (
                   <div className="mb-16">
-                    <JournalCard article={featured} variant="featured" />
+                    <JournalCard article={featured} variant="featured" headingLevel="h2" />
                   </div>
                 )}
-                <JournalGrid articles={rest} columns={3} />
+                <JournalGrid articles={rest} columns={3} headingLevel="h2" />
               </>
             )}
           </div>

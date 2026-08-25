@@ -9,6 +9,7 @@ interface JournalGridProps {
   showExcerpt?: boolean;
   location?: string;
   emptyState?: ReactNode;
+  headingLevel?: 'h2' | 'h3';
 }
 
 export function JournalGrid({
@@ -17,6 +18,7 @@ export function JournalGrid({
   showExcerpt = true,
   location = 'journal',
   emptyState,
+  headingLevel = 'h3',
 }: JournalGridProps) {
   if (articles.length === 0) return <>{emptyState ?? null}</>;
   return (
@@ -32,6 +34,7 @@ export function JournalGrid({
           article={article}
           showExcerpt={showExcerpt}
           location={location}
+          headingLevel={headingLevel}
         />
       ))}
     </div>

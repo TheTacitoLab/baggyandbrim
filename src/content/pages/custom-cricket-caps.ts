@@ -153,7 +153,7 @@ export const customCricketCaps: CommercialPageContent = {
       confirmed: true,
     },
     {
-      question: 'Do you supply other teamwear?',
+      question: 'Do you make anything besides headwear?',
       answer:
         'No. We make cricket headwear. If you need shirts and trousers as well, we will work alongside whoever supplies them and match colours where we can.',
       confirmed: true,

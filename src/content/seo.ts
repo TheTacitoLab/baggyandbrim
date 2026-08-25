@@ -50,7 +50,7 @@ export const PAGE_SEO = {
   '/enquire': {
     title: 'Start Your Headwear Brief',
     description:
-      'Tell us what your club needs and we will come back with options, a specification and a realistic timeline. Custom cricket headwear from a minimum of 12.',
+      'Tell us what your club needs and we will come back with options, a specification and a realistic timeline. Custom cricket headwear. Minimum order 12.',
     intent: 'Direct conversion destination for the enquiry form.',
   },
   '/privacy': {
@@ -77,7 +77,9 @@ export function buildMetadata({ path, type = 'website' }: BuildMetadataArgs): Me
   const entry = PAGE_SEO[path];
   const fullTitle = `${entry.title} | ${SITE.name}`;
   return {
-    title: entry.title,
+    // The layout's title.template does not apply to its own segment, so the
+    // homepage sets the suffixed title itself; child routes use the template.
+    title: path === '/' ? fullTitle : entry.title,
     description: entry.description,
     alternates: { canonical: path },
     openGraph: {

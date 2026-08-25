@@ -71,7 +71,7 @@ export const IMAGE_MANIFEST: ImageAsset[] = [
     id: 'journal-default',
     src: null,
     alt: 'A custom cricket cap photographed as a still life.',
-    subject: 'Fallback featured image for Journal articles without art.',
+    subject: 'Custom cricket cap still life on a neutral background.',
     crop: 'Studio still life, neutral.',
     treatment: 'Studio still life.',
     aspectDesktop: '3:2',
