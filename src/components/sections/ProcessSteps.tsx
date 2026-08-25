@@ -97,7 +97,7 @@ export function ProcessSteps({
               <div className="grid grid-cols-1 gap-2 py-6 md:py-8 lg:grid-cols-12 lg:gap-8">
                 <span className="type-display-m font-display lg:col-span-2">{step.number}</span>
                 <h3 className="type-heading-s self-center lg:col-span-3">{step.title}</h3>
-                <p className="type-body self-center text-on-surface lg:col-span-7">
+                <p className="type-body max-w-[68ch] self-center text-on-surface lg:col-span-7">
                   {step.description}
                 </p>
               </div>

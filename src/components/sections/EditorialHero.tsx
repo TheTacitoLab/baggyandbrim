@@ -86,16 +86,17 @@ export function EditorialHero({
     );
   }
 
-  // Homepage hero. Two 50/50 columns on desktop, text left and image right. On
-  // mobile the text leads so both CTAs sit above the fold at 375x667 (Revision
-  // 6.2, the hard requirement); the framed image follows beneath it.
+  // Homepage hero. A 5/7 split on desktop so the photograph takes the extra
+  // width as the viewport grows; text left, framed image right. On mobile the
+  // text leads so both CTAs sit above the fold at 375x667 (Revision 6.2, the
+  // hard requirement); the framed image follows beneath it.
   const lines = displayLines ?? ['Old Heads.', 'New Game.'];
   return (
     <section data-surface="paper" aria-labelledby="hero-heading" className="bg-paper">
       <div className="hero-home">
-        <div className="shell">
-          <div className="flex flex-col gap-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16">
-            <div>
+        <div className="shell w-full">
+          <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:items-center lg:gap-16">
+            <div className="lg:col-span-5">
               <Reveal>
                 <p className="type-label text-on-surface-secondary">{eyebrow}</p>
               </Reveal>
@@ -108,7 +109,8 @@ export function EditorialHero({
                 </Reveal>
               </h1>
               <Reveal delay={180}>
-                <p className="type-body-l mt-6 max-w-[46ch] text-on-surface-secondary">{intro}</p>
+                {/* The column widens with the shell; the lead paragraph does not. */}
+                <p className="type-body-l mt-6 max-w-[34ch] text-on-surface-secondary">{intro}</p>
               </Reveal>
               <Reveal delay={260}>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row md:mt-10 lg:mt-12">
@@ -138,10 +140,10 @@ export function EditorialHero({
                 </Reveal>
               )}
             </div>
-            <div>
+            <div className="lg:col-span-7">
               <InstantFrame
                 imageId={imageId}
-                sizes="(max-width: 1023px) 100vw, 50vw"
+                sizes="(min-width: 1024px) 58vw, 100vw"
                 priority
                 revealDirection="none"
               />

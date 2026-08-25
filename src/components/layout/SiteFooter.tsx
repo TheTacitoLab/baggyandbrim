@@ -31,7 +31,7 @@ export function SiteFooter() {
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-4">
           <div className="col-span-2 flex flex-col gap-4 md:col-span-1">
-            <Wordmark href="/" size="md" />
+            <Wordmark href="/" size="md" variant="paper" />
             <p className="type-label text-on-surface-secondary">{SITE.tagline}</p>
             <p className="type-body-s max-w-[34ch] text-on-surface-secondary">
               {SITE.descriptionLong}
@@ -88,7 +88,7 @@ export function SiteFooter() {
 
         {/* The sign-off: the wordmark stays large. */}
         <div className="mt-20">
-          <Wordmark as="div" size="lg" className="w-full" />
+          <Wordmark as="div" size="lg" variant="paper" />
           <p className="type-label mt-3 text-on-surface-secondary">{SITE.tagline}</p>
         </div>
 

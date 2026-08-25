@@ -20,7 +20,7 @@ export function SeoContent() {
           </div>
           <div className="flex flex-col gap-5 lg:col-span-7 lg:col-start-6">
             {seoContent.body.map((paragraph, index) => (
-              <p key={index} className="type-body text-on-surface-secondary">
+              <p key={index} className="type-body max-w-[68ch] text-on-surface-secondary">
                 {paragraph}
               </p>
             ))}
