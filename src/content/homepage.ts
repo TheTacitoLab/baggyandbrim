@@ -76,7 +76,7 @@ export const HOMEPAGE = {
   },
   headwear: {
     heading: 'The Headwear',
-    intro: 'Three products, made properly, in your colours, with your crest.',
+    intro: 'Three products, made properly, to order.',
     categories,
   },
   customisation: {
@@ -84,7 +84,6 @@ export const HOMEPAGE = {
     intro:
       'Nothing here is pulled from stock. Every piece is made to order around your club, from the colours to the label inside.',
     options,
-    closingLine: 'Your club. Your colours. Your headwear.',
   },
   // A held breath between the commercial sections. Mode A, ink.
   brand: {

@@ -329,6 +329,7 @@ export function CommercialPage({ content }: { content: CommercialPageContent }) 
         primaryCta={content.primaryCta}
         secondaryCta={content.secondaryCta}
         image={content.heroImage}
+        polaroids={content.heroPolaroids}
         height="reduced"
       />
 

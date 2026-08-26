@@ -87,7 +87,8 @@ export interface CommercialPageContent {
   h1: string;
   heroEyebrow: string;
   heroIntro: string;
-  heroImage?: SitePhoto; // omit for a text-only hero
+  heroImage?: SitePhoto; // a single photo beside the title
+  heroPolaroids?: { front: SitePhoto; back: SitePhoto }; // a paired polaroid stack instead
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   blocks: CommercialBlock[];

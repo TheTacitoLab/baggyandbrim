@@ -48,10 +48,6 @@ export function Customisation() {
             </li>
           ))}
         </ul>
-
-        <Reveal delay={80}>
-          <p className="type-heading-m mt-8 md:mt-12 max-w-[68ch]">{customisation.closingLine}</p>
-        </Reveal>
       </div>
     </section>
   );

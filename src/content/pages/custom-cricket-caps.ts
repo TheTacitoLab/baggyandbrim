@@ -13,7 +13,9 @@ export const customCricketCaps: CommercialPageContent = {
   heroEyebrow: 'Custom cricket headwear',
   heroIntro:
     'Baggy caps, presentation caps and wide-brim sun hats, made to order in your club colours with your crest embroidered where you want it. Minimum order 12.',
-  // Text-only hero; the page's photography is the two-photo split below.
+  // The page's photography sits beside the title: the baggy cap and sun hat
+  // prints laid together as a polaroid pair.
+  heroPolaroids: { front: PRODUCT_PHOTOS.baggy, back: PRODUCT_PHOTOS.sunHat },
   primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See how the process works', href: '/#process' },
   blocks: [
@@ -53,7 +55,6 @@ export const customCricketCaps: CommercialPageContent = {
         },
       ],
     },
-    { kind: 'imagePair', left: PRODUCT_PHOTOS.baggy, right: PRODUCT_PHOTOS.sunHat },
     {
       kind: 'options',
       heading: 'What you can customise',

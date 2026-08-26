@@ -497,6 +497,19 @@
     }
   }
 
+  /* --- Polaroid print ----------------------------------------------------
+     Instant-print treatment for the paired photographs on the range hub:
+     warm white stock, hairline edge, soft drop shadow so the front print
+     reads as laid on the back one. */
+  .polaroid {
+    background-color: #fdfcf8;
+    padding: 5% 5% 0;
+    border: 1px solid rgba(17, 17, 15, 0.08);
+    box-shadow:
+      0 14px 30px rgba(17, 17, 15, 0.16),
+      0 2px 6px rgba(17, 17, 15, 0.1);
+  }
+
   /* --- Enquiry form on the ink surface (Section 15.2) -------------------- */
   .field-input,
   .field-textarea {

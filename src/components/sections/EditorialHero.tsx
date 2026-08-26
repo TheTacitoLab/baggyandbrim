@@ -1,12 +1,8 @@
 import Image, { getImageProps } from 'next/image';
+import type { SitePhoto } from '@/types';
 import { Reveal } from '@/components/ui/Reveal';
 import { CtaLink } from '@/components/ui/CtaLink';
-
-interface HeroImage {
-  src: string;
-  alt: string;
-  objectPosition?: string; // CSS object-position, e.g. '50% 22%'
-}
+import { PolaroidPair } from '@/components/media/PolaroidPair';
 
 interface EditorialHeroProps {
   eyebrow: string;
@@ -17,8 +13,11 @@ interface EditorialHeroProps {
   secondaryCta?: { label: string; href: string };
   microLine?: string;
   /** Reduced (commercial) variant only: the page's main photo, rendered as a
-   *  clean portrait inside the shell. Omit for a text-only hero. */
-  image?: HeroImage;
+   *  clean portrait inside the shell. */
+  image?: SitePhoto;
+  /** Reduced variant only: a paired polaroid stack beside the title instead of
+   *  a single photo (the range hub uses this). */
+  polaroids?: { front: SitePhoto; back: SitePhoto };
   height?: 'full' | 'reduced';
 }
 
@@ -73,6 +72,7 @@ export function EditorialHero({
   secondaryCta,
   microLine,
   image,
+  polaroids,
   height = 'full',
 }: EditorialHeroProps) {
   if (height === 'reduced') {
@@ -131,6 +131,11 @@ export function EditorialHero({
                   style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
                 />
               </figure>
+            )}
+            {polaroids && (
+              <div className="mt-6 lg:col-span-5 lg:col-start-8 lg:mt-0">
+                <PolaroidPair front={polaroids.front} back={polaroids.back} />
+              </div>
             )}
           </div>
         </div>
