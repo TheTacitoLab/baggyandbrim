@@ -28,7 +28,8 @@ function HeadwearTile({ category, delay }: { category: HeadwearCategory; delay: 
         />
       </div>
 
-      <h3 className="type-heading-l mt-5">
+      {/* Sized so every title holds one line inside its tile at every width. */}
+      <h3 className="type-heading-m mt-5 whitespace-nowrap">
         <CtaLink
           href={category.href}
           event="headwear_category_click"
@@ -67,7 +68,9 @@ export function HeadwearCategories() {
           </Reveal>
         </div>
 
-        <ul className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6 md:mt-12 lg:gap-8">
+        {/* gap-6 matches the product pages' 12-column grid, so a homepage tile
+            and the landing-page photo it links to render at the same size. */}
+        <ul className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6 md:mt-12">
           {headwear.categories.map((category, index) => (
             <HeadwearTile key={category.slug} category={category} delay={index * 120} />
           ))}

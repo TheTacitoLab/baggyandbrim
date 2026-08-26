@@ -54,13 +54,13 @@ export const PAGE_SEO = {
     intent: 'Direct conversion destination for the enquiry form.',
   },
   '/privacy': {
-    title: 'Privacy Policy',
-    description: 'How Baggy & Brim handles the information you send through the enquiry form.',
+    title: 'Privacy Notice',
+    description: 'How Baggy & Brim handles personal information from enquiries, orders and visits to the site.',
     intent: 'Legal reference.',
   },
   '/terms': {
     title: 'Terms',
-    description: 'Terms covering the use of the Baggy & Brim website.',
+    description: 'Terms covering the use of the Baggy & Brim website and every order placed with us.',
     intent: 'Legal reference.',
   },
 } as const satisfies Record<string, PageSeoEntry>;

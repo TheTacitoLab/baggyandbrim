@@ -418,7 +418,7 @@ export function EnquiryForm({ source }: EnquiryFormProps) {
             <span className="type-body-s">
               I agree to {SITE.name} storing these details in order to respond to my enquiry. See the{' '}
               <Link href="/privacy" className="text-link">
-                Privacy Policy
+                Privacy Notice
               </Link>
               .
             </span>
@@ -444,6 +444,14 @@ export function EnquiryForm({ source }: EnquiryFormProps) {
           <button type="submit" disabled={submitting} className="btn btn-primary w-full sm:w-auto">
             {submitting ? ENQUIRY_FORM.submitBusy : ENQUIRY_FORM.submitIdle}
           </button>
+          <p className="type-body-s mt-4 text-on-surface-secondary">
+            Submitting an enquiry is not an order. Nothing is binding until you approve a design.
+            See our{' '}
+            <Link href="/terms" className="text-link">
+              Terms
+            </Link>
+            .
+          </p>
         </div>
       </div>
     </form>

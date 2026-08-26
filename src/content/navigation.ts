@@ -1,13 +1,16 @@
 import type { NavItem } from '@/types';
 
-// Primary navigation: the three products, then the Journal (build spec Section
-// 11.1, revised). Product-led so the range is legible in seconds; the enquiry
-// CTA sits separately as the header button.
+// Primary navigation: the three products, the Journal, then Contact (build
+// spec 4.2). Product-led so the range is legible in seconds. Contact is a
+// plain nav item, styled identically to the others; the leading slash on its
+// href means it reaches the enquiry section from every page, navigating home
+// and then scrolling.
 export const NAV_ITEMS: NavItem[] = [
   { label: 'Baggy Caps', href: '/baggy-cricket-caps' },
   { label: 'Presentation Caps', href: '/cricket-presentation-caps' },
   { label: 'Wide-Brim Sun Hats', href: '/cricket-sun-hats' },
   { label: 'Journal', href: '/journal' },
+  { label: 'Contact', href: '/#enquire' },
 ];
 
 export interface SiteLink {
@@ -46,9 +49,3 @@ export const EXPLORE_LINKS: SiteLink[] = [
   { label: 'Process', href: '/#process' },
   { label: 'Start Your Headwear Brief', href: '/enquire' },
 ];
-
-export const HEADER_CTA = {
-  label: 'Start Your Headwear Brief',
-  hash: '#enquire',
-  href: '/enquire',
-} as const;

@@ -76,17 +76,15 @@ export function EditorialHero({
   height = 'full',
 }: EditorialHeroProps) {
   if (height === 'reduced') {
+    // Commercial hero (build spec 7.1): copy left, the page's photo beside the
+    // title on the right, top edges level. A col-span-4 figure in a 12-column
+    // grid at gap-6 resolves to the same width as a homepage tile in its
+    // 3-column grid at gap-6, so the two render at identical size.
     return (
       <section data-surface="paper" aria-labelledby="hero-heading" className="bg-paper">
         <div className="shell">
-          <div
-            className={
-              image
-                ? 'flex flex-col gap-8 pb-16 pt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16 lg:pb-24 lg:pt-12'
-                : 'pb-16 pt-8 lg:pb-24 lg:pt-12'
-            }
-          >
-            <div>
+          <div className="grid grid-cols-1 gap-6 pb-16 pt-8 lg:grid-cols-12 lg:items-start lg:pb-24 lg:pt-12">
+            <div className="lg:col-span-7">
               <Reveal>
                 <p className="type-label text-on-surface-secondary">{eyebrow}</p>
               </Reveal>
@@ -122,17 +120,17 @@ export function EditorialHero({
               </Reveal>
             </div>
             {image && (
-              <div className="relative aspect-[4/5] w-full overflow-hidden">
+              <figure className="relative mt-4 aspect-[4/5] w-full overflow-hidden lg:col-span-4 lg:col-start-9 lg:mt-0">
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  sizes="(max-width: 1023px) 100vw, 50vw"
+                  sizes="(min-width: 1024px) 33vw, 100vw"
                   preload
                   className="object-cover"
                   style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
                 />
-              </div>
+              </figure>
             )}
           </div>
         </div>
@@ -142,7 +140,9 @@ export function EditorialHero({
 
   const lines = displayLines ?? ['Old Heads.', 'New Game.'];
   const copy = (
-    <div className="max-w-[34ch]">
+    // The lead runs wider on desktop; the h1 has fixed line breaks so it does
+    // not reflow (build spec 5.1).
+    <div className="max-w-[34ch] lg:max-w-[44ch]">
       <Reveal>
         <p className="type-label">{eyebrow}</p>
       </Reveal>

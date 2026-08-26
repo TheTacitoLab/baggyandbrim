@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import { buildMetadata } from '@/content/seo';
-import { COMPANY, SITE } from '@/content/site';
+import { getLegalDocument, LEGAL_LAST_UPDATED } from '@/content/legal';
 import { breadcrumbSchema } from '@/lib/schema';
 import { JsonLd } from '@/components/seo/JsonLd';
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
+import { LegalArticle } from '@/components/legal/LegalArticle';
 
 export const metadata: Metadata = buildMetadata({ path: '/terms' });
 
-// Full terms are supplied by the client or legal before launch (TODO-06). Nothing
-// is invented here beyond a factual description of what the site is for.
+// Content lives in content/legal/terms.md (build spec 3.6). Part A covers use
+// of the website; Part B covers orders. Square-bracket placeholders are
+// unsupplied company details, left visible until launch.
 export default function TermsPage() {
   const breadcrumbs = [{ label: 'Home', href: '/' }, { label: 'Terms' }];
   return (
@@ -23,20 +25,11 @@ export default function TermsPage() {
             Terms
           </h1>
           <p className="type-body-s mt-4 text-on-surface-secondary">
-            The full terms are being finalised before launch.
+            Last updated: {LEGAL_LAST_UPDATED}
           </p>
-          <p className="type-body mt-8 text-on-surface">
-            This website provides information about {SITE.name} and its custom cricket headwear, and
-            lets you submit an enquiry. Sending a brief starts a conversation; it is not an order.
-            Nothing is produced until you have seen and approved a design.
-          </p>
-          <p className="type-body mt-5 text-on-surface">
-            Full terms covering orders, artwork, payment and delivery will be published here before
-            launch.
-          </p>
-          {COMPANY.registeredDetails && (
-            <p className="type-body-s mt-10 text-on-surface-secondary">{COMPANY.registeredDetails}</p>
-          )}
+          <div className="mt-10">
+            <LegalArticle source={getLegalDocument('terms')} />
+          </div>
         </div>
       </div>
     </section>

@@ -1,13 +1,11 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef } from 'react';
-import { HEADER_CTA, NAV_ITEMS } from '@/content/navigation';
+import { NAV_ITEMS } from '@/content/navigation';
 import { useReducedMotion } from '@/hooks/useReducedMotion';
 import { useScrollLock } from '@/hooks/useScrollLock';
-import { scrollToHash } from './SiteHeader';
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -15,10 +13,9 @@ interface MobileMenuProps {
 }
 
 /** Full-screen ink panel. Focus trapped, Escape closes, background scroll
- *  locked, trigger refocused on close (build spec Section 1, 28.2). */
+ *  locked, trigger refocused on close (build spec Section 1, 28.2). Contact is
+ *  a normal menu item like the rest — no button pinned to the bottom (4.2). */
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  const pathname = usePathname();
-  const isHome = pathname === '/';
   const panelRef = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -67,13 +64,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     requestAnimationFrame(() => document.getElementById('menu-trigger')?.focus());
   };
 
-  const onAnchor = (event: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
-    if (!isHome) return;
-    event.preventDefault();
-    close();
-    requestAnimationFrame(() => scrollToHash(hash));
-  };
-
   return (
     <AnimatePresence>
       {isOpen && (
@@ -104,7 +94,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </button>
           </div>
 
-          <div className="shell flex flex-1 flex-col justify-between overflow-y-auto pb-8 pt-6">
+          <div className="shell flex flex-1 flex-col overflow-y-auto pb-8 pt-6">
             <nav aria-label="Primary" className="flex flex-col">
               <ul className="flex flex-col gap-5">
                 {NAV_ITEMS.map((item) => (
@@ -116,14 +106,6 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 ))}
               </ul>
             </nav>
-
-            <Link
-              href={isHome ? HEADER_CTA.hash : HEADER_CTA.href}
-              onClick={isHome ? (e) => onAnchor(e, HEADER_CTA.hash) : close}
-              className="btn btn-primary mt-10 w-full"
-            >
-              {HEADER_CTA.label}
-            </Link>
           </div>
         </motion.div>
       )}

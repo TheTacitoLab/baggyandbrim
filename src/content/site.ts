@@ -15,14 +15,14 @@ export const SITE = {
 } as const;
 
 export interface ContactDetails {
-  email: string | null; // TODO_CONTACT_EMAIL (TODO-02)
+  email: string; // the single contact address, imported everywhere it appears
   instagram: string | null; // TODO_SOCIAL_INSTAGRAM (TODO-03)
   linkedin: string | null; // TODO_SOCIAL_LINKEDIN (TODO-03)
 }
 
-// TODO-02 / TODO-03: supplied by client. Do not invent. Null keeps items hidden.
+// TODO-03: socials supplied by client. Do not invent. Null keeps items hidden.
 export const CONTACT: ContactDetails = {
-  email: null,
+  email: 'hello@baggyandbrim.com',
   instagram: null,
   linkedin: null,
 };

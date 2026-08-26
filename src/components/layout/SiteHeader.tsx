@@ -2,29 +2,14 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
-import { HEADER_CTA, NAV_ITEMS } from '@/content/navigation';
-import { track } from '@/lib/analytics';
+import { useEffect, useState } from 'react';
+import { NAV_ITEMS } from '@/content/navigation';
 import { cn } from '@/lib/utils';
 import { MobileMenu } from './MobileMenu';
 import { Wordmark } from './Wordmark';
 
-/** Smooth-scroll to an in-page anchor and move focus to it, so keyboard and
- *  screen-reader users land where sighted users do (build spec 28.2). */
-export function scrollToHash(hash: string) {
-  const id = hash.replace('#', '');
-  const el = document.getElementById(id);
-  if (!el) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-  el.setAttribute('tabindex', '-1');
-  el.focus({ preventScroll: true });
-  history.replaceState(null, '', hash);
-}
-
 export function SiteHeader() {
   const pathname = usePathname();
-  const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -35,11 +20,6 @@ export function SiteHeader() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const onCtaClick = useCallback(() => {
-    track('cta_header_click', { page_path: pathname });
-    if (isHome) scrollToHash(HEADER_CTA.hash);
-  }, [isHome, pathname]);
 
   return (
     <header
@@ -53,11 +33,12 @@ export function SiteHeader() {
       <div className="shell flex h-full items-center justify-between gap-6">
         <Wordmark href="/" as="span" size="sm" />
 
-        {/* Desktop navigation: the three products, then the Journal. */}
-        <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
+        {/* Desktop navigation: the three products, the Journal and Contact —
+            five identical items, no boxed CTA (build spec 4.2). */}
+        <nav aria-label="Primary" className="hidden items-center lg:flex">
           <ul className="flex items-center gap-7">
             {NAV_ITEMS.map((item) => {
-              const isActive = pathname.startsWith(item.href);
+              const isActive = !item.href.includes('#') && pathname.startsWith(item.href);
               return (
                 <li key={item.label}>
                   <Link
@@ -74,23 +55,12 @@ export function SiteHeader() {
               );
             })}
           </ul>
-          <Link
-            href={isHome ? HEADER_CTA.hash : HEADER_CTA.href}
-            onClick={onCtaClick}
-            className="btn btn-primary"
-          >
-            {HEADER_CTA.label}
-          </Link>
         </nav>
 
         {/* Mobile controls */}
         <div className="flex items-center gap-3 lg:hidden">
-          <Link
-            href={isHome ? HEADER_CTA.hash : HEADER_CTA.href}
-            onClick={onCtaClick}
-            className="type-label px-3 py-2"
-          >
-            Enquire
+          <Link href="/#enquire" className="type-label px-3 py-2">
+            Contact
           </Link>
           <button
             id="menu-trigger"
