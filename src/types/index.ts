@@ -17,20 +17,12 @@ export interface NavItem {
   href: string; // '/baggy-cricket-caps' or '/journal'
 }
 
-export interface ImageAsset {
-  id: string;
-  src: string | null; // null renders the Placeholder component
+// A real photograph in /public. objectPosition tunes the crop so the headwear
+// leads the frame.
+export interface SitePhoto {
+  src: string;
   alt: string;
-  subject: string; // art direction note, not rendered
-  crop: string; // art direction note, not rendered
-  treatment: string; // art direction note, not rendered
-  aspectDesktop: `${number}:${number}`;
-  aspectMobile: `${number}:${number}` | 'hidden';
-  width: number;
-  height: number;
-  blurDataURL?: string;
-  decorative: boolean; // true forces alt=""
-  priority?: boolean;
+  objectPosition?: string; // CSS object-position, e.g. '50% 22%'
 }
 
 export interface HeadwearCategory {
@@ -38,8 +30,7 @@ export interface HeadwearCategory {
   title: string;
   body: string;
   href: string;
-  linkLabel: string;
-  imageId: string;
+  image: SitePhoto;
 }
 
 export interface ProcessStep {
@@ -85,7 +76,7 @@ export type CommercialBlock =
       items?: string[];
       rows?: { title: string; description: string }[];
     }
-  | { kind: 'imagery'; heading?: string; surface?: 'paper' | 'cream'; images: { id: string; caption: string }[] }
+  | { kind: 'imagePair'; left: SitePhoto; right: SitePhoto }
   | { kind: 'process'; heading: string }
   | { kind: 'quantities'; heading: string; intro: string };
 
@@ -96,7 +87,7 @@ export interface CommercialPageContent {
   h1: string;
   heroEyebrow: string;
   heroIntro: string;
-  heroImageId: string;
+  heroImage?: SitePhoto; // omit for a text-only hero
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   blocks: CommercialBlock[];

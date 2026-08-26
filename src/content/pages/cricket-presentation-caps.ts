@@ -1,4 +1,5 @@
 import type { CommercialPageContent } from '@/types';
+import { PRODUCT_PHOTOS } from '@/content/products';
 
 // /cricket-presentation-caps (build spec Section 13.6). Low volume, highest value
 // and highest intent on the site. Tone note: humour is off this page entirely.
@@ -12,7 +13,7 @@ export const cricketPresentationCaps: CommercialPageContent = {
   heroEyebrow: 'Milestones and awards',
   heroIntro:
     'Caps made to be handed over and kept. Numbered, named and boxed, for debuts, milestones, life memberships and club anniversaries.',
-  heroImageId: 'lp-hero-presentation',
+  heroImage: PRODUCT_PHOTOS.presentation,
   primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See baggy caps', href: '/baggy-cricket-caps' },
   blocks: [
@@ -49,15 +50,6 @@ export const cricketPresentationCaps: CommercialPageContent = {
         'Three details do most of the emotional work: the number, the name and the year.',
         "A cap number places a player in the club's history. A name inside the cap makes it theirs rather than a spare. A year gives it a fixed point, which matters twenty seasons later when nobody remembers which summer it was.",
         'If your club has never numbered caps, this is the natural moment to start. Working backwards through the honours board is a job, but clubs that do it rarely regret it.',
-      ],
-    },
-    {
-      kind: 'imagery',
-      heading: 'Presentation caps in detail',
-      surface: 'cream',
-      images: [
-        { id: 'lp-presentation-box', caption: 'Boxed with a named card.' },
-        { id: 'lp-presentation-number', caption: 'The cap number, embroidered inside.' },
       ],
     },
     {

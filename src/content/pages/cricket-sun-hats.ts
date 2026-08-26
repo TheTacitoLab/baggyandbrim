@@ -1,4 +1,5 @@
 import type { CommercialPageContent } from '@/types';
+import { PRODUCT_PHOTOS } from '@/content/products';
 
 // /cricket-sun-hats (build spec Section 13.4). Clear immediately that these are
 // custom club hats, not off-the-shelf stock. No sun-protection rating is claimed
@@ -12,7 +13,7 @@ export const cricketSunHats: CommercialPageContent = {
   heroEyebrow: 'Custom club sun hats',
   heroIntro:
     'Wide-brim cricket hats made in your club colours with your crest on the front. Ordered for squads, junior sections and anyone spending a full day in the field.',
-  heroImageId: 'lp-hero-sunhat',
+  heroImage: PRODUCT_PHOTOS.sunHat,
   primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See presentation caps', href: '/cricket-presentation-caps' },
   blocks: [
@@ -39,15 +40,6 @@ export const cricketSunHats: CommercialPageContent = {
       body: [
         'The front panel is the natural home for a crest, but it is not the only option. The side, the rear and the underside of the brim all work, and clubs often split the club name and a year across two of them.',
         'Colours come from whatever you already use. Send a shirt or a crest file and we will hold them across the whole run, so the squad reads as one side rather than a set of near-misses.',
-      ],
-    },
-    {
-      kind: 'imagery',
-      heading: 'Sun hats in the field',
-      surface: 'cream',
-      images: [
-        { id: 'lp-sunhat-field', caption: 'Worn through a full session at the boundary.' },
-        { id: 'lp-sunhat-detail', caption: 'Brim stitching and crest, close up.' },
       ],
     },
     {

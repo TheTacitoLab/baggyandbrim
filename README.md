@@ -37,7 +37,7 @@ npm run build       # production build (Turbopack)
 npm start           # serve the production build
 npm run lint        # ESLint (next/core-web-vitals + jsx-a11y)
 npm run typecheck   # tsc --noEmit
-npm run check       # copy, duplicate-copy and image-placeholder checks
+npm run check       # copy and duplicate-copy checks
 ```
 
 ## Environment variables
@@ -63,8 +63,11 @@ globally, guarding against a preview deployment indexing before launch.
 
 ```
 content/journal/           # {slug}.mdx articles
-public/images/             # real photography (see the image manifest)
-scripts/                   # QA scripts (copy, duplicate copy, images)
+public/hero/               # the two homepage hero crops
+public/products/           # the three product photographs
+public/brand/              # the wordmark logo (dark and paper-white)
+public/images/             # journal photography ({slug} featured images)
+scripts/                   # QA scripts (copy, duplicate copy)
 src/app/                   # routes, metadata files, api/enquiry route, sitemap, robots
 src/components/            # layout, sections, ui, media, journal, form, seo, analytics
 src/content/               # ALL on-screen copy, typed, plus the image manifest and SEO
@@ -111,18 +114,19 @@ Content rules: no invented statistics, historical claims, quotations, or named c
 players or dates unless supplied and verified. Record any sourced factual claim in a
 `sources` comment in the MDX file.
 
-## Image manifest
+## Imagery
 
-Every image is registered in `src/content/assets/image-manifest.ts` with its ratio,
-subject, crop, treatment and alt text (alt lives here, not inline, so it can be reviewed
-as a set). Entries have `src: null` until a real file exists, at which point the local
-`Placeholder` component renders a labelled cream block at the correct aspect ratio.
+The site renders exactly five photographs plus the logo, nothing else:
 
-**To add a real image:** drop the file into `public/images/...` and set `src` on the
-manifest entry (or, for Journal featured images, just add the file at the path in the
-frontmatter — a missing file falls back to the `journal-default` placeholder). Run
-`npm run check:images` to list entries still using placeholders. Zero placeholders is a
-blocking launch item.
+- `/public/hero/hero-desktop.png` and `/public/hero/hero-mobile.png` — the homepage
+  hero, art-directed via `<picture>` so each device downloads one file.
+- `/public/products/*.jpg` — the three product photographs, registered once in
+  `src/content/products.ts` (src, alt and object-position live there) and shared by
+  the homepage tiles, each product page and the `/custom-cricket-caps` photo split.
+
+Journal featured images live at the path named in the article frontmatter under
+`/public/images/`; while the file is missing the article simply renders without one
+(no placeholder, and the Article JSON-LD omits the image).
 
 ## Design tokens
 

@@ -25,10 +25,10 @@ const LOGO_SRC: Record<NonNullable<WordmarkProps['variant']>, string> = {
   paper: '/brand/baggy-and-brim-light.png',
 };
 
-// sm matches the ~24px text lockup the logo replaces in the header, growing to
-// 32px on desktop. lg is the large footer sign-off.
+// sm is the header mark: the original 24/28/32px lockup sizing reduced by 20
+// percent. lg is the large footer sign-off.
 const SIZE_CLASS: Record<NonNullable<WordmarkProps['size']>, string> = {
-  sm: 'h-6 sm:h-7 lg:h-8',
+  sm: 'h-[19px] sm:h-[22px] lg:h-[26px]',
   md: 'h-7 lg:h-8',
   lg: 'h-12 md:h-16 lg:h-20',
   xl: 'h-16 md:h-24',

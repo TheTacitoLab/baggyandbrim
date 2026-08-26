@@ -1,6 +1,12 @@
-import { InstantFrame } from '@/components/media/InstantFrame';
+import Image, { getImageProps } from 'next/image';
 import { Reveal } from '@/components/ui/Reveal';
 import { CtaLink } from '@/components/ui/CtaLink';
+
+interface HeroImage {
+  src: string;
+  alt: string;
+  objectPosition?: string; // CSS object-position, e.g. '50% 22%'
+}
 
 interface EditorialHeroProps {
   eyebrow: string;
@@ -10,15 +16,53 @@ interface EditorialHeroProps {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   microLine?: string;
-  imageId: string;
+  /** Reduced (commercial) variant only: the page's main photo, rendered as a
+   *  clean portrait inside the shell. Omit for a text-only hero. */
+  image?: HeroImage;
   height?: 'full' | 'reduced';
 }
 
+// The homepage hero photography. Two crops, art-directed via <picture> so each
+// device downloads exactly one file (Next.js image docs, Art direction). The
+// h1 carries the message, so both images are decorative (alt="").
+const HERO_DESKTOP = '/hero/hero-desktop.png';
+const HERO_MOBILE = '/hero/hero-mobile.png';
+
+function HeroPicture() {
+  const common = { alt: '', sizes: '100vw' };
+  const {
+    props: { srcSet: desktop },
+  } = getImageProps({ ...common, width: 2049, height: 1152, src: HERO_DESKTOP });
+  const {
+    props: { srcSet: mobile, ...rest },
+  } = getImageProps({ ...common, width: 1080, height: 1920, src: HERO_MOBILE });
+  return (
+    <picture>
+      <source media="(min-width: 768px)" srcSet={desktop} />
+      <source media="(max-width: 767px)" srcSet={mobile} />
+      <img
+        {...rest}
+        alt=""
+        fetchPriority="high"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+    </picture>
+  );
+}
+
 /**
- * The hero (Revision 6). Rebuilt from scratch: two 50/50 columns inside the page
- * container, never full-bleed, never overlaid. Text left, one framed image
- * right. On mobile the image comes first, then the text, everything left-aligned
- * (Mode B). Exactly one H1 per page. Content is readable with JavaScript off.
+ * The hero. Homepage variant: the photograph runs full bleed below the header
+ * and fills the rest of the first viewport. On desktop and tablet the subject
+ * sits right of frame, so the copy overlays on the left, aligned to the shell
+ * gutters — its left edge lines up with every section heading below. On mobile
+ * the image stands alone full screen and the copy follows beneath it.
+ *
+ * Contrast, measured against the actual pixels behind the desktop copy region
+ * (left half of hero-desktop.png): ink text reads at 5.7:1 at the darkest
+ * percentile and 9.6:1 at the median, so no scrim is needed and none renders.
+ *
+ * Commercial variant: paper surface, two columns, the page's own photo inside
+ * the shell. Exactly one H1 per page. Content is readable with JavaScript off.
  */
 export function EditorialHero({
   eyebrow,
@@ -28,15 +72,20 @@ export function EditorialHero({
   primaryCta,
   secondaryCta,
   microLine,
-  imageId,
+  image,
   height = 'full',
 }: EditorialHeroProps) {
   if (height === 'reduced') {
-    // Landing-page hero: paper surface, two columns, not full bleed.
     return (
       <section data-surface="paper" aria-labelledby="hero-heading" className="bg-paper">
         <div className="shell">
-          <div className="flex flex-col gap-8 pb-16 pt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16 lg:pb-24 lg:pt-12">
+          <div
+            className={
+              image
+                ? 'flex flex-col gap-8 pb-16 pt-8 lg:grid lg:grid-cols-2 lg:items-center lg:gap-16 lg:pb-24 lg:pt-12'
+                : 'pb-16 pt-8 lg:pb-24 lg:pt-12'
+            }
+          >
             <div>
               <Reveal>
                 <p className="type-label text-on-surface-secondary">{eyebrow}</p>
@@ -72,82 +121,83 @@ export function EditorialHero({
                 </div>
               </Reveal>
             </div>
-            <div>
-              <InstantFrame
-                imageId={imageId}
-                sizes="(max-width: 1023px) 100vw, 50vw"
-                priority
-                revealDirection="none"
-              />
-            </div>
+            {image && (
+              <div className="relative aspect-[4/5] w-full overflow-hidden">
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  sizes="(max-width: 1023px) 100vw, 50vw"
+                  preload
+                  className="object-cover"
+                  style={image.objectPosition ? { objectPosition: image.objectPosition } : undefined}
+                />
+              </div>
+            )}
           </div>
         </div>
       </section>
     );
   }
 
-  // Homepage hero. A 5/7 split on desktop so the photograph takes the extra
-  // width as the viewport grows; text left, framed image right. On mobile the
-  // text leads so both CTAs sit above the fold at 375x667 (Revision 6.2, the
-  // hard requirement); the framed image follows beneath it.
   const lines = displayLines ?? ['Old Heads.', 'New Game.'];
+  const copy = (
+    <div className="max-w-[34ch]">
+      <Reveal>
+        <p className="type-label">{eyebrow}</p>
+      </Reveal>
+      <h1 id="hero-heading" className="mt-6">
+        <Reveal as="span" className="block">
+          <span className="type-display-l block whitespace-nowrap">{lines[0]}</span>
+        </Reveal>{' '}
+        <Reveal as="span" delay={100} className="block">
+          <span className="type-display-l block whitespace-nowrap">{lines[1]}</span>
+        </Reveal>
+      </h1>
+      <Reveal delay={180}>
+        <p className="type-body-l mt-6">{intro}</p>
+      </Reveal>
+      <Reveal delay={260}>
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <CtaLink
+            href={primaryCta.href}
+            event="cta_hero_click"
+            className="btn btn-primary whitespace-nowrap"
+          >
+            {primaryCta.label}
+          </CtaLink>
+          {secondaryCta && (
+            <CtaLink
+              href={secondaryCta.href}
+              event="cta_hero_click"
+              className="btn btn-secondary whitespace-nowrap"
+            >
+              {secondaryCta.label}
+            </CtaLink>
+          )}
+        </div>
+      </Reveal>
+      {microLine && (
+        <Reveal delay={340}>
+          <p className="type-body-s mt-8">{microLine}</p>
+        </Reveal>
+      )}
+    </div>
+  );
+
   return (
     <section data-surface="paper" aria-labelledby="hero-heading" className="bg-paper">
-      <div className="hero-home">
-        <div className="shell w-full">
-          <div className="flex flex-col gap-8 lg:grid lg:grid-cols-12 lg:items-center lg:gap-16">
-            <div className="lg:col-span-5">
-              <Reveal>
-                <p className="type-label text-on-surface-secondary">{eyebrow}</p>
-              </Reveal>
-              <h1 id="hero-heading" className="mt-4">
-                <Reveal as="span" className="block">
-                  <span className="type-display-l block whitespace-nowrap">{lines[0]}</span>
-                </Reveal>{' '}
-                <Reveal as="span" delay={100} className="block">
-                  <span className="type-display-l block whitespace-nowrap">{lines[1]}</span>
-                </Reveal>
-              </h1>
-              <Reveal delay={180}>
-                {/* The column widens with the shell; the lead paragraph does not. */}
-                <p className="type-body-l mt-6 max-w-[34ch] text-on-surface-secondary">{intro}</p>
-              </Reveal>
-              <Reveal delay={260}>
-                <div className="mt-8 flex flex-col gap-4 sm:flex-row md:mt-10 lg:mt-12">
-                  <CtaLink
-                    href={primaryCta.href}
-                    event="cta_hero_click"
-                    className="btn btn-primary w-full sm:w-auto"
-                  >
-                    {primaryCta.label}
-                  </CtaLink>
-                  {secondaryCta && (
-                    <CtaLink
-                      href={secondaryCta.href}
-                      event="cta_hero_click"
-                      className="btn btn-secondary w-full sm:w-auto"
-                    >
-                      {secondaryCta.label}
-                    </CtaLink>
-                  )}
-                </div>
-              </Reveal>
-              {microLine && (
-                <Reveal delay={340}>
-                  <p className="type-body-s mt-6 max-w-[52ch] text-on-surface-secondary">
-                    {microLine}
-                  </p>
-                </Reveal>
-              )}
-            </div>
-            <div className="lg:col-span-7">
-              <InstantFrame
-                imageId={imageId}
-                sizes="(min-width: 1024px) 58vw, 100vw"
-                priority
-                revealDirection="none"
-              />
-            </div>
+      {/* The fixed header overlays the top of the page; clearing it here means
+          the image starts directly beneath it, no gap and no overlap. */}
+      <div className="pt-[var(--header-height)]">
+        <div className="relative">
+          <div className="relative h-[calc(100svh-var(--header-height))] w-full">
+            <HeroPicture />
+          </div>
+          {/* One copy block, one H1: below the image in flow on mobile, overlaid
+              left of the subject from md up. */}
+          <div className="md:absolute md:inset-0 md:flex md:items-center">
+            <div className="shell w-full pb-14 pt-10 md:py-0">{copy}</div>
           </div>
         </div>
       </div>

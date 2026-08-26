@@ -80,15 +80,19 @@ export function collectionPageSchema(path: string, name: string, description: st
 
 export function articleSchema(article: JournalArticle): Record<string, unknown> {
   const url = `${env.siteUrl}/journal/${article.slug}`;
-  const image = article.featuredImage.startsWith('http')
-    ? article.featuredImage
-    : `${env.siteUrl}${article.featuredImage}`;
+  // Only declare an image once the file actually exists; schema must not point
+  // at placeholder art or a 404.
+  const image = article.featuredImageExists
+    ? article.featuredImage.startsWith('http')
+      ? article.featuredImage
+      : `${env.siteUrl}${article.featuredImage}`
+    : undefined;
   return {
     '@context': 'https://schema.org',
     '@type': 'Article',
     headline: article.title,
     description: article.metaDescription ?? article.excerpt,
-    image,
+    ...(image ? { image } : {}),
     datePublished: article.publishedDate,
     dateModified: article.updatedDate ?? article.publishedDate,
     author: { '@type': 'Organization', name: article.author },

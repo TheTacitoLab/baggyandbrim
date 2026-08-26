@@ -1,50 +1,51 @@
+import Image from 'next/image';
 import { HOMEPAGE } from '@/content/homepage';
 import type { HeadwearCategory } from '@/types';
-import { ScorebookRule } from '@/components/ui/ScorebookRule';
-import { InstantFrame } from '@/components/media/InstantFrame';
 import { CtaLink } from '@/components/ui/CtaLink';
 import { Reveal } from '@/components/ui/Reveal';
 
 const { headwear } = HOMEPAGE;
 
-const CARD_SIZES = '(max-width: 767px) 100vw, 33vw';
-
-/** One category card. The card is a four-row grid — frame, title, body, link —
- *  that adopts the parent's rows as a subgrid from tablet up, so titles, body
- *  and links share baselines across the row regardless of copy length. */
-function HeadwearCategoryCard({ category, delay }: { category: HeadwearCategory; delay: number }) {
+/** One product tile. The stretched link (after:absolute after:inset-0 on a
+ *  relative parent) makes the whole tile clickable while keeping exactly one
+ *  link in the accessibility tree; the title is the accessible name and the
+ *  only call to action, so it carries display weight. */
+function HeadwearTile({ category, delay }: { category: HeadwearCategory; delay: number }) {
   return (
-    <Reveal
-      as="article"
-      delay={delay}
-      className="grid grid-rows-[auto_auto_1fr_auto] gap-0 md:row-span-4 md:grid-rows-subgrid"
-    >
-      <InstantFrame imageId={category.imageId} sizes={CARD_SIZES} revealDirection="none" />
-      <div className="mt-6">
-        <h3 className="type-heading-s">{category.title}</h3>
+    <Reveal as="li" delay={delay} className="group relative">
+      <div className="relative aspect-[4/5] w-full overflow-hidden">
+        <Image
+          src={category.image.src}
+          alt={category.image.alt}
+          fill
+          sizes="(min-width: 640px) 33vw, 100vw"
+          className="object-cover transition-transform duration-500 motion-safe:group-hover:scale-[1.03]"
+          style={
+            category.image.objectPosition
+              ? { objectPosition: category.image.objectPosition }
+              : undefined
+          }
+        />
       </div>
-      <p className="type-body mt-4 text-on-surface">{category.body}</p>
-      <div>
-        <div className="mt-6">
-          <ScorebookRule animate={false} />
-        </div>
-        <div className="mt-5">
-          <CtaLink
-            href={category.href}
-            event="headwear_category_click"
-            params={{ category: category.slug, location: 'homepage' }}
-            className="text-link"
-          >
-            {category.linkLabel}
-          </CtaLink>
-        </div>
-      </div>
+
+      <h3 className="type-heading-l mt-5">
+        <CtaLink
+          href={category.href}
+          event="headwear_category_click"
+          params={{ category: category.slug, location: 'homepage' }}
+          className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-2 focus-visible:outline-offset-4"
+        >
+          {category.title}
+        </CtaLink>
+      </h3>
+
+      <p className="type-body-s mt-2 text-on-surface-secondary">{category.body}</p>
     </Reveal>
   );
 }
 
-/** Headwear (Revision surface: paper). Mode B: flush-left heading and intro, a
- *  perfectly aligned three-across image row, and one primary CTA. */
+/** Headwear (surface: paper). Three clean portrait tiles, titles as the links,
+ *  no buttons. */
 export function HeadwearCategories() {
   return (
     <section
@@ -66,22 +67,11 @@ export function HeadwearCategories() {
           </Reveal>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-x-4 gap-y-12 md:mt-12 md:grid-cols-3 md:gap-x-6 md:grid-rows-[auto_auto_1fr_auto] lg:gap-x-8">
+        <ul className="mt-8 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6 md:mt-12 lg:gap-8">
           {headwear.categories.map((category, index) => (
-            <HeadwearCategoryCard key={category.slug} category={category} delay={index * 120} />
+            <HeadwearTile key={category.slug} category={category} delay={index * 120} />
           ))}
-        </div>
-
-        <div className="mt-8 md:mt-10 lg:mt-12">
-          <CtaLink
-            href={headwear.cta.href}
-            event="cta_section_click"
-            params={{ section: 'headwear' }}
-            className="btn btn-primary"
-          >
-            {headwear.cta.label}
-          </CtaLink>
-        </div>
+        </ul>
       </div>
     </section>
   );

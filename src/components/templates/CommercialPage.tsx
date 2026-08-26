@@ -1,4 +1,5 @@
-import type { CommercialBlock, CommercialPageContent, Surface } from '@/types';
+import Image from 'next/image';
+import type { CommercialBlock, CommercialPageContent, SitePhoto, Surface } from '@/types';
 import { PAGE_SEO, type SeoPath } from '@/content/seo';
 import { VOLUME_BRACKETS, PROCESS_STEPS } from '@/content/site';
 import { getArticlesForCommercialPage } from '@/lib/journal';
@@ -13,7 +14,6 @@ import { EnquiryCtaBand } from '@/components/sections/EnquiryCtaBand';
 import { RelatedHeadwear } from '@/components/sections/RelatedHeadwear';
 import { FaqList } from '@/components/ui/FaqList';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
-import { InstantFrame } from '@/components/media/InstantFrame';
 import { TextLink } from '@/components/ui/TextLink';
 import { Reveal } from '@/components/ui/Reveal';
 
@@ -200,31 +200,34 @@ function renderBlock(block: CommercialBlock, index: number, surface: Surface) {
         </BlockShell>
       );
 
-    case 'imagery': {
-      const threeUp = block.images.length >= 3;
-      const columns = threeUp ? 'lg:grid-cols-3' : 'lg:grid-cols-2';
-      const sizes = threeUp ? '(max-width: 767px) 100vw, 33vw' : '(max-width: 767px) 100vw, 50vw';
-      // One aspect ratio per row (Revision 5.1): 4:5 for a three-up row, 3:2 for
-      // a supporting pair.
-      const ratio = threeUp ? '4:5' : '3:2';
+    case 'imagePair': {
+      // Two photos split by a single hairline: gap-px with the section's own
+      // surface colour showing through, so it reads as a sliver of page rather
+      // than an added line. No outer frame, border, padding or shadow. Bounded
+      // height on desktop keeps the pair from swallowing the page; portrait
+      // 4:5 is retained on mobile where the columns stack and the hairline
+      // runs horizontally.
+      const pane = (photo: SitePhoto) => (
+        <figure className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-auto sm:h-[clamp(460px,62svh,760px)]">
+          <Image
+            src={photo.src}
+            alt={photo.alt}
+            fill
+            sizes="(min-width: 640px) 50vw, 100vw"
+            className="object-cover"
+            style={photo.objectPosition ? { objectPosition: photo.objectPosition } : undefined}
+          />
+        </figure>
+      );
       return (
-        <BlockShell key={index} surface={surface} labelledBy={hid}>
-          <h2 id={hid} className="sr-only">
-            {block.heading ?? 'Gallery'}
-          </h2>
-          <div className={cn('grid grid-cols-1 gap-4 md:gap-6 lg:gap-8', columns)}>
-            {block.images.map((image) => (
-              <InstantFrame
-                key={image.id}
-                imageId={image.id}
-                sizes={sizes}
-                caption={image.caption}
-                ratioDesktop={ratio}
-                ratioMobile={ratio}
-              />
-            ))}
+        <section key={index} data-surface={surface} className="bg-surface text-on-surface">
+          <div className="shell section-pad">
+            <div className="grid grid-cols-1 gap-px bg-[color:var(--surface)] sm:grid-cols-2">
+              {pane(block.left)}
+              {pane(block.right)}
+            </div>
           </div>
-        </BlockShell>
+        </section>
       );
     }
 
@@ -325,7 +328,7 @@ export function CommercialPage({ content }: { content: CommercialPageContent }) 
         intro={content.heroIntro}
         primaryCta={content.primaryCta}
         secondaryCta={content.secondaryCta}
-        imageId={content.heroImageId}
+        image={content.heroImage}
         height="reduced"
       />
 

@@ -1,4 +1,5 @@
 import type { CommercialPageContent } from '@/types';
+import { PRODUCT_PHOTOS } from '@/content/products';
 
 // /custom-cricket-caps — the commercial hub (build spec Section 13.2).
 // Broad commercial intent, routes to the three styles. Accent: green.
@@ -12,7 +13,7 @@ export const customCricketCaps: CommercialPageContent = {
   heroEyebrow: 'Custom cricket headwear',
   heroIntro:
     'Baggy caps, presentation caps and wide-brim sun hats, made to order in your club colours with your crest embroidered where you want it. Minimum order 12.',
-  heroImageId: 'lp-hero-custom',
+  // Text-only hero; the page's photography is the two-photo split below.
   primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See how the process works', href: '/#process' },
   blocks: [
@@ -52,15 +53,7 @@ export const customCricketCaps: CommercialPageContent = {
         },
       ],
     },
-    {
-      kind: 'imagery',
-      heading: 'Custom cricket caps in detail',
-      surface: 'cream',
-      images: [
-        { id: 'lp-custom-crest', caption: 'Embroidery worked into a front panel.' },
-        { id: 'lp-custom-club', caption: 'Made for a specific club, in its colours.' },
-      ],
-    },
+    { kind: 'imagePair', left: PRODUCT_PHOTOS.baggy, right: PRODUCT_PHOTOS.sunHat },
     {
       kind: 'options',
       heading: 'What you can customise',

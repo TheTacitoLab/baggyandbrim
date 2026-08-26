@@ -1,6 +1,5 @@
 import type { ProcessStep } from '@/types';
 import { ScorebookRule } from '@/components/ui/ScorebookRule';
-import { InstantFrame } from '@/components/media/InstantFrame';
 import { Reveal } from '@/components/ui/Reveal';
 import { CtaLink } from '@/components/ui/CtaLink';
 import { TextLink } from '@/components/ui/TextLink';
@@ -13,7 +12,6 @@ interface ProcessStepsProps {
   showCounter?: boolean;
   note?: string;
   closingLine?: string;
-  imageId?: string;
   cta?: { label: string; href: string };
   fullProcessHref?: string; // compact mode link to the full sequence
 }
@@ -28,7 +26,6 @@ export function ProcessSteps({
   showCounter = true,
   note,
   closingLine,
-  imageId,
   cta,
   fullProcessHref,
 }: ProcessStepsProps) {
@@ -107,12 +104,6 @@ export function ProcessSteps({
             <ScorebookRule />
           </li>
         </ol>
-
-        {imageId && (
-          <div className="mt-8 md:mt-12">
-            <InstantFrame imageId={imageId} sizes="(max-width: 1023px) 100vw, 1000px" />
-          </div>
-        )}
 
         {note && (
           <p className="type-body-s mt-6 max-w-[68ch] text-on-surface-secondary">{note}</p>

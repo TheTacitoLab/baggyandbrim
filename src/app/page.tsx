@@ -26,7 +26,6 @@ export default function HomePage() {
         primaryCta={hero.primaryCta}
         secondaryCta={hero.secondaryCta}
         microLine={hero.microLine}
-        imageId={hero.imageId}
         height="full"
       />
       <HeadwearCategories />

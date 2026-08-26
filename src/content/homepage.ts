@@ -1,5 +1,6 @@
 import type { CustomisationOption, HeadwearCategory } from '@/types';
 import { ORDER_DETAIL_CLAIM, PROCESS_STEPS } from '@/content/site';
+import { PRODUCT_PHOTOS } from '@/content/products';
 
 // All homepage copy (build spec Section 12). Every on-screen string lives here so
 // copy can be reviewed without reading JSX. British English throughout.
@@ -10,24 +11,21 @@ const categories: HeadwearCategory[] = [
     title: 'Baggy Caps',
     body: 'Custom baggy cricket caps using club colours, crests and bespoke detailing.',
     href: '/baggy-cricket-caps',
-    linkLabel: 'View baggy caps',
-    imageId: 'category-baggy',
+    image: PRODUCT_PHOTOS.baggy,
   },
   {
     slug: 'presentation',
     title: 'Presentation Caps',
     body: 'Premium structured caps for presentation, touring, travel and club use.',
     href: '/cricket-presentation-caps',
-    linkLabel: 'View presentation caps',
-    imageId: 'category-presentation',
+    image: PRODUCT_PHOTOS.presentation,
   },
   {
     slug: 'sun-hats',
     title: 'Wide-Brim Sun Hats',
     body: 'Custom cricket sun hats made in club colours with embroidery and bespoke detailing.',
     href: '/cricket-sun-hats',
-    linkLabel: 'View sun hats',
-    imageId: 'category-sunhat',
+    image: PRODUCT_PHOTOS.sunHat,
   },
 ];
 
@@ -75,13 +73,11 @@ export const HOMEPAGE = {
     primaryCta: { label: 'Start Your Headwear Brief', href: '#enquire' },
     secondaryCta: { label: 'Explore the Headwear', href: '#headwear' },
     microLine: ORDER_DETAIL_CLAIM,
-    imageId: 'hero-primary',
   },
   headwear: {
     heading: 'The Headwear',
     intro: 'Three products, made properly, in your colours, with your crest.',
     categories,
-    cta: { label: 'See the full range', href: '/custom-cricket-caps' },
   },
   customisation: {
     heading: 'Custom for Your Club',

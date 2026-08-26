@@ -1,4 +1,5 @@
 import type { CommercialPageContent } from '@/types';
+import { PRODUCT_PHOTOS } from '@/content/products';
 
 // /baggy-cricket-caps (build spec Section 13.3). Serves commissioning intent
 // first, research intent second. Qualifies as club-focused in the H1 and first
@@ -12,7 +13,7 @@ export const baggyCricketCaps: CommercialPageContent = {
   heroEyebrow: 'Traditional cricket caps',
   heroIntro:
     'Traditional cricket caps made in your club colours, with your crest embroidered on the front and your cap numbers inside. The cap that gets handed over and kept.',
-  heroImageId: 'lp-hero-baggy',
+  heroImage: PRODUCT_PHOTOS.baggy,
   primaryCta: { label: 'Start Your Headwear Brief', href: '/enquire' },
   secondaryCta: { label: 'See how presentation caps work', href: '/cricket-presentation-caps' },
   blocks: [
@@ -39,15 +40,6 @@ export const baggyCricketCaps: CommercialPageContent = {
       body: [
         'Plenty of clubs number their caps. The first player capped is number one, and the sequence runs from there. It turns a cap into a record and gives the club something to maintain.',
         'If you already run a numbering system, we will apply it. If you are starting one, we can add numbers inside the cap or on the rear panel. Clubs starting from scratch usually begin with the current first team and work backwards through the honours board.',
-      ],
-    },
-    {
-      kind: 'imagery',
-      heading: 'Baggy caps in detail',
-      surface: 'cream',
-      images: [
-        { id: 'lp-baggy-inside', caption: 'The label and cap number sit inside the crown.' },
-        { id: 'lp-baggy-presentation', caption: 'Boxed and ready to be handed over.' },
       ],
     },
     {
